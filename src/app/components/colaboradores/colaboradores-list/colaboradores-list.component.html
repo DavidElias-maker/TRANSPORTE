@@ -1,28 +1,29 @@
 <div class="container my-5">
   <h1 class="mb-3">Colaboradores</h1>
+
+  <button type="button" class="btn btn-dark">Agregar Colaborador</button>
 <table class="table">
   <thead>
     <tr>
-      <th>Id</th>
-      <th>PrimerNombre</th>
-      <th>PrimerApellido</th>
+      <th>Primer Nombre</th>
+      <th>Primer Apellido</th>
       <th>DNI</th>
-      <th>FechaNacimiento</th>
+      <th>Fecha de Nacimiento</th>
       <th>Direccion</th>
       <th>Telefono</th>
-      <th>Activo</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let colaborador of colaboradores">
-      <td>{{colaborador.id}}</td>
       <td>{{ colaborador.primerNombre }}</td>
       <td>{{ colaborador.primerApellido }}</td>
       <td>{{ colaborador.dni }} </td>
       <td>{{ colaborador.fechaNacimiento | date: "yyyy-MM-dd" }}</td>
       <td>{{ colaborador.direccion }}</td>
       <td>{{ colaborador.telefono }}</td>
-      <td>{{ colaborador.activo }}</td>
+      <br>
+      <td> <button type="button" class="btn btn-warning">Actualizar</button></td>
+      <td> <button type="button" class="btn btn-danger">Eliminar</button></td>
     </tr>
   </tbody>
 </table>
