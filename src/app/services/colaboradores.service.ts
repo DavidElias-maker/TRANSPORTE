@@ -17,5 +17,9 @@ export class ColaboradoresService {
 
     }
 
+    PostColaborador(data:Colaborador){
+    return this.http.post<Colaborador[]>(this.baseApiUrl + '/api/Colaborador',data);
+    }
+
    }
 

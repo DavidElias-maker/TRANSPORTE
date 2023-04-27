@@ -1,15 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Colaborador } from 'src/app/Models/colaboradores.model';
 import { ColaboradoresService } from '../../../services/colaboradores.service';
-import { DatePipe } from '@angular/common';
+import { FormBuilder } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-colaboradores-list',
   templateUrl: './colaboradores-list.component.html',
   styleUrls: ['./colaboradores-list.component.css'],
-  template: '<p>{{ colaborador.fechaNacimiento | date: "yyyy-MM-dd" }}</p>'
+
+
 })
-export class ColaboradoresListComponent {
+
+
+
+
+export class ColaboradoresListComponent implements OnInit {
 
   public colaboradores: Colaborador[] = [];
 
@@ -21,6 +28,17 @@ export class ColaboradoresListComponent {
 
       });
 
+  }
+
+  ngOnInit(): void
+  {
+
+
 
   }
+
+
 }
+
+
+

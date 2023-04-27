@@ -1,7 +1,8 @@
+
 <div class="container my-5">
   <h1 class="mb-3">Colaboradores</h1>
+  <app-colaboradores-modal></app-colaboradores-modal>
 
-  <button type="button" class="btn btn-dark">Agregar Colaborador</button>
 <table class="table">
   <thead>
     <tr>
@@ -14,6 +15,7 @@
     </tr>
   </thead>
   <tbody>
+
     <tr *ngFor="let colaborador of colaboradores">
       <td>{{ colaborador.primerNombre }}</td>
       <td>{{ colaborador.primerApellido }}</td>
@@ -27,4 +29,6 @@
     </tr>
   </tbody>
 </table>
+
 </div>
+
