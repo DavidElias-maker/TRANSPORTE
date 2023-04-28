@@ -2,6 +2,7 @@ import { Colaborador } from './../../../Models/colaboradores.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validator, Validators } from '@angular/forms';
 import { ColaboradoresService } from '../../../services/colaboradores.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-colaboradores-modal',
@@ -11,10 +12,11 @@ import { ColaboradoresService } from '../../../services/colaboradores.service';
 export class ColaboradoresModalComponent implements OnInit {
 
 colaboradorform!:FormGroup;
+data:undefined|Colaborador[];
 
 
 
-  constructor(private FormBuilder:FormBuilder, private Colaborador:ColaboradoresService ){
+  constructor(private FormBuilder:FormBuilder, private Colaborador:ColaboradoresService, private router:Router){
 
   }
 
@@ -28,12 +30,18 @@ colaboradorform!:FormGroup;
       telefono:['',Validators.required]
 
     })
+
   }
 
   addcolaborador(data:Colaborador){
-    console.log(data)
     this.Colaborador.PostColaborador(data).subscribe( res=>{
       this.colaboradorform.reset();
     });
+
   }
+  exit() {
+    location.reload();
+  }
+
+
 }

@@ -13,8 +13,10 @@ const routes: Routes = [
   },
   {
     path: 'Colaboradores',
-    component: ColaboradoresListComponent
+    component: ColaboradoresListComponent,
+
   }
+
 
 ];
 
