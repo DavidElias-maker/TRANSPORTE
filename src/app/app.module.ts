@@ -9,6 +9,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ColaboradoresModalComponent } from './components/colaboradores/colaboradores-modal/colaboradores-modal.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { OrderModule } from 'ngx-order-pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -26,7 +28,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     MatDialogModule,
     ReactiveFormsModule,
     FormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    OrderModule,
+    NgxPaginationModule
+
 
   ],
   providers: [],

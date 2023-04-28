@@ -9,7 +9,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Primer Nombre</th>
+      <th (click)="sort('primerNombre')">Primer Nombre&nbsp;<i class="fa fa-sort"></i></th>
       <th>Primer Apellido</th>
       <th>DNI</th>
       <th>Fecha de Nacimiento</th>
@@ -19,7 +19,7 @@
   </thead>
   <tbody>
 
-    <tr *ngFor="let colaborador of colaboradores | filter:searchText">
+    <tr *ngFor="let colaborador of colaboradores | filter:searchText | orderBy: key:reverse | paginate: {itemsPerPage:5,currentPage:p,totalItems:colaboradores.length};">
       <td>{{ colaborador.primerNombre }}</td>
       <td>{{ colaborador.primerApellido }}</td>
       <td>{{ colaborador.dni }} </td>
@@ -31,6 +31,7 @@
       <td> <button type="button" class="btn btn-danger">Eliminar</button></td>
     </tr>
   </tbody>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </table>
 
 </div>

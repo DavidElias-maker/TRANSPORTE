@@ -17,10 +17,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 
 
-export class ColaboradoresListComponent implements OnInit {
+export class ColaboradoresListComponent  {
 
   public colaboradores: Colaborador[] = [];
   searchText: any;
+  p:number = 1;
 
   constructor(private ColaboradoresService: ColaboradoresService) {
 
@@ -32,7 +33,11 @@ export class ColaboradoresListComponent implements OnInit {
 
 
 }
-ngOnInit(): void {
+key:string = 'primerNombre';
+reverse:boolean = false;
+sort(key:any){
+  this.key = key;
+  this.reverse = !this.reverse;
 
 }
 
