@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Colaborador } from 'src/app/Models/colaboradores.model';
 import { ColaboradoresService } from '../../../services/colaboradores.service';
-import { FormBuilder } from '@angular/forms';
+import { Pipe, PipeTransform } from '@angular/core';
+
 
 
 
@@ -19,6 +20,7 @@ import { FormBuilder } from '@angular/forms';
 export class ColaboradoresListComponent implements OnInit {
 
   public colaboradores: Colaborador[] = [];
+  searchText: any;
 
   constructor(private ColaboradoresService: ColaboradoresService) {
 
@@ -28,17 +30,18 @@ export class ColaboradoresListComponent implements OnInit {
 
       });
 
-  }
-
-  ngOnInit(): void
-  {
-
-
-
-  }
-
 
 }
+ngOnInit(): void {
+
+}
+
+  }
+
+
+
+
+
 
 
 

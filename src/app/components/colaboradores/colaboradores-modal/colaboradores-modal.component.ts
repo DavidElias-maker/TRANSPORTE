@@ -49,5 +49,4 @@ data:undefined|Colaborador[];
      });
    }
 
-
-}
+  }

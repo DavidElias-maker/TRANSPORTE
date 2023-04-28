@@ -6,8 +6,9 @@ import { AppComponent } from './app.component';
 import { ColaboradoresListComponent } from './components/colaboradores/colaboradores-list/colaboradores-list.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ColaboradoresModalComponent } from './components/colaboradores/colaboradores-modal/colaboradores-modal.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 
@@ -23,7 +24,9 @@ import { ColaboradoresModalComponent } from './components/colaboradores/colabora
     AppRoutingModule,
     HttpClientModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    Ng2SearchPipeModule
 
   ],
   providers: [],
