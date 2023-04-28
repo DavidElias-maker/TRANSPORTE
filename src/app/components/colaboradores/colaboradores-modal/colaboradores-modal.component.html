@@ -1,4 +1,5 @@
 <button type="button" id="modalbutton" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+
   Ingresar Colaborador
 </button>
 
@@ -30,8 +31,8 @@
         </form>
             </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [routerLink]="['/Colaborador']" (click)="resetPage()">Close</button>
-        <button (click)="addcolaborador(this.colaboradorform.value)" [disabled]="this.colaboradorform.invalid" type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [routerLink]="['/Colaborador']" (click)="resetPage()">Cerrar</button>
+        <button (click)="addcolaborador(this.colaboradorform.value)" [disabled]="this.colaboradorform.invalid" type="button" class="btn btn-primary">Ingresar</button>
       </div>
     </div>
   </div>

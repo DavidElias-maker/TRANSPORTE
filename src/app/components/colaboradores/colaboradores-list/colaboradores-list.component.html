@@ -2,6 +2,7 @@
 <div class="container my-5">
   <h1 class="mb-3">Colaboradores</h1>
   <app-colaboradores-modal></app-colaboradores-modal><br><br>
+
   <label class="apellido">Buscar: </label><td></td>
   <input type="text" name="search" [(ngModel)]="searchText" placeholder="search">
 
@@ -27,12 +28,18 @@
       <td>{{ colaborador.direccion }}</td>
       <td>{{ colaborador.telefono }}</td>
       <br>
-      <td> <button type="button" class="btn btn-warning">Actualizar</button></td>
-      <td> <button type="button" class="btn btn-danger">Eliminar</button></td>
+      <td>
+        <button type="button" id="modalbutton" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalUpdate">Actualizar</button>
+       <td><button type="button" class="btn btn-danger">Eliminar</button>
+      </td>
     </tr>
   </tbody>
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </table>
 
 </div>
+<app-colaboradores-update></app-colaboradores-update>
+
+
+
 

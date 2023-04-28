@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ColaboradoresListComponent } from './components/colaboradores/colaboradores-list/colaboradores-list.component';
@@ -11,6 +10,7 @@ import { ColaboradoresModalComponent } from './components/colaboradores/colabora
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { OrderModule } from 'ngx-order-pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ColaboradoresUpdateComponent } from './components/colaboradores/colaboradores-update/colaboradores-update.component';
 
 
 
@@ -18,7 +18,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
   declarations: [
     AppComponent,
     ColaboradoresListComponent,
-    ColaboradoresModalComponent
+    ColaboradoresModalComponent,
+    ColaboradoresUpdateComponent
 
   ],
   imports: [
