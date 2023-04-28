@@ -2,7 +2,7 @@ import { Colaborador } from './../../../Models/colaboradores.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validator, Validators } from '@angular/forms';
 import { ColaboradoresService } from '../../../services/colaboradores.service';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-colaboradores-modal',
@@ -16,7 +16,7 @@ data:undefined|Colaborador[];
 
 
 
-  constructor(private FormBuilder:FormBuilder, private Colaborador:ColaboradoresService, private router:Router){
+  constructor(private FormBuilder:FormBuilder, private Colaborador:ColaboradoresService, private router: Router, private route:ActivatedRoute){
 
   }
 
@@ -39,9 +39,15 @@ data:undefined|Colaborador[];
     });
 
   }
-  exit() {
-    location.reload();
-  }
+   resetPage() {
+    const prevConfiguration = this.router.routeReuseStrategy.shouldReuseRoute;
+     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+     this.router.onSameUrlNavigation = "reload";
+     this.router.navigate(["./"], { relativeTo: this.route }).then(() => {
+         this.router.routeReuseStrategy.shouldReuseRoute = prevConfiguration;
+         this.router.onSameUrlNavigation = "ignore";
+     });
+   }
 
 
 }
