@@ -1,10 +1,12 @@
+import { Colaborador } from './../../../Models/colaboradores.model';
 import { Component, OnInit } from '@angular/core';
-import { Colaborador } from 'src/app/Models/colaboradores.model';
 import { ColaboradoresService } from '../../../services/colaboradores.service';
 import { Pipe, PipeTransform } from '@angular/core';
 import { ColaboradoresUpdateComponent } from '../colaboradores-update/colaboradores-update.component';
 import { FormBuilder,FormControl,FormGroup,Validator, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { data } from 'jquery';
+
 
 
 
@@ -34,7 +36,7 @@ export class ColaboradoresListComponent implements OnInit{
 
 
 
-  constructor(private ColaboradoresService: ColaboradoresService, private FormBuilder:FormBuilder) {
+  constructor(private ColaboradoresService: ColaboradoresService, private FormBuilder:FormBuilder,private Colaborador:ColaboradoresService) {
 
     this.ColaboradoresService.getAllColaboradores()
       .subscribe(colaboradoresRecibidos => {
@@ -67,20 +69,25 @@ sort(key:any){
 
 
 edit(data: Colaborador) {
-
-
-
-
   this.colaboradorUpdateform.controls['primernombre'].setValue(data.primerNombre);
   this.colaboradorUpdateform.controls['primerapellido'].setValue(data.primerApellido);
   this.colaboradorUpdateform.controls['dni'].setValue(data.dni);
-  this.colaboradorUpdateform.controls['fechanacimiento'].setValue(data.fechaNacimiento.toLocaleString);
+  this.colaboradorUpdateform.controls['fechanacimiento'].setValue(data.fechaNacimiento.toString().substring(0,10));
   this.colaboradorUpdateform.controls['direccion'].setValue(data.direccion);
   this.colaboradorUpdateform.controls['telefono'].setValue(data.telefono);
 
-
 }
 
+  updatecolaborador(data:Colaborador){
+
+
+
+    this.Colaborador.UpdateColaborador(data,data.Id).subscribe( res=>{
+      this.colaboradorUpdateform.reset();
+    });
+
+
+}
 
 
   }

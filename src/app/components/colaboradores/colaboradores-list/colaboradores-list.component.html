@@ -29,8 +29,8 @@
       <td>{{ colaborador.telefono }}</td>
       <br>
       <td>
-        <button type="button" id="modalbutton" (click)="edit(colaborador)" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalUpdate">Actualizar</button>
-       <td><button type="button" class="btn btn-danger">Eliminar</button>
+        <button type="button" id="modalbutton" (click)="edit(colaborador)" (click)="colaborador.id" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalUpdate">Actualizar</button>
+       <td><button type="button" class="btn btn-danger" (click)="colaborador.id">Eliminar</button>
       </td>
     </tr>
   </tbody>
@@ -68,7 +68,7 @@
             </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button  type="button" class="btn btn-primary" >Actualizar</button>
+        <button  type="button"   class="btn btn-primary" (click)="updatecolaborador(this.colaboradorUpdateform.value)"  >Actualizar</button>
       </div>
     </div>
   </div>

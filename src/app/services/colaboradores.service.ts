@@ -23,7 +23,7 @@ export class ColaboradoresService {
     }
 
 UpdateColaborador(data:Colaborador,id:number){
-  return this.http.post<Colaborador>(this.baseApiUrl + '/api/Colaborador' + id,data).
+  return this.http.put<Colaborador>(this.baseApiUrl + '/api/Colaborador' + id,data).
    pipe(map((res:Colaborador)=>{
     return res;
   }))
