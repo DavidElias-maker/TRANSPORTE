@@ -1,6 +1,6 @@
 import { Colaborador } from './../../../Models/colaboradores.model';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormGroup,Validator, Validators } from '@angular/forms';
+import { FormBuilder,FormControl,FormGroup,Validator, Validators } from '@angular/forms';
 
 import { data } from 'jquery';
 
@@ -32,16 +32,13 @@ constructor(private FormBuilder:FormBuilder){
   }
 
 
-
-
-  edit(data:Colaborador){
-    this.colaboradorUpdateform.controls['primerNombre'].setValue(data.primerNombre)
-    this.colaboradorUpdateform.controls['primerApellido'].setValue(data.primerApellido)
-    this.colaboradorUpdateform.controls['dni'].setValue(data.dni)
-    this.colaboradorUpdateform.controls['fechanacimiento'].setValue(data.fechaNacimiento)
-    this.colaboradorUpdateform.controls['direccion'].setValue(data.direccion)
-    this.colaboradorUpdateform.controls['telefono'].setValue(data.telefono)
-
+  edit(data: Colaborador) {
+    this.colaboradorUpdateform.controls['primernombre'].setValue(data.primerNombre);
+    this.colaboradorUpdateform.controls['primerapellido'].setValue(data.primerApellido);
+    this.colaboradorUpdateform.controls['dni'].setValue(data.dni);
+    this.colaboradorUpdateform.controls['fechanacimiento'].setValue(data.fechaNacimiento);
+    this.colaboradorUpdateform.controls['direccion'].setValue(data.direccion);
+    this.colaboradorUpdateform.controls['telefono'].setValue(data.telefono);
   }
 
 }

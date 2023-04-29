@@ -3,8 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validator, Validators } from '@angular/forms';
 import { ColaboradoresService } from '../../../services/colaboradores.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ColaboradoresUpdateComponent } from '../colaboradores-update/colaboradores-update.component';
+import { data } from 'jquery';
 
 @Component({
+
   selector: 'app-colaboradores-modal',
   templateUrl: './colaboradores-modal.component.html',
   styleUrls: ['./colaboradores-modal.component.css']
@@ -48,5 +51,7 @@ data:undefined|Colaborador[];
          this.router.onSameUrlNavigation = "ignore";
      });
    }
+
+
 
   }

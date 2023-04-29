@@ -29,7 +29,7 @@
       <td>{{ colaborador.telefono }}</td>
       <br>
       <td>
-        <button type="button" id="modalbutton" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalUpdate">Actualizar</button>
+        <button type="button" id="modalbutton" (click)="edit(colaborador)" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalUpdate">Actualizar</button>
        <td><button type="button" class="btn btn-danger">Eliminar</button>
       </td>
     </tr>
@@ -38,7 +38,41 @@
 </table>
 
 </div>
-<app-colaboradores-update></app-colaboradores-update>
+
+<!-- Modal Update -->
+<div class="modal fade" id="ModalUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div style="background-color: black" class="modal-header">
+        <h3 class="modal-title" id="exampleModalLongTitle" style="color: white">Actualizar</h3>
+        <button type="button"  class="close" data-bs-dismiss="modal" aria-label="Close">
+
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="colaboradorUpdateform">
+          <label class="nombre">Primer Nombre: </label>
+                <input class="Nombre" type="text" id="NOMBRE"  name="nombre" formControlName="primernombre"><td></td>
+                <label class="apellido">Primer Apellido: </label>
+                <input class="Apellido" type="text" id="APELLIDO" name="apellido" formControlName="primerapellido"><br><br>
+                <label class="dni">DNI: </label>
+                <input class="Dni" type="text" id="DNI" name="dni" formControlName="dni"><br><br>
+                <label class="fecha_nac">Fecha de Nacimiento: </label>
+                <input class="Fecha_Nac" type="date" id="FECHA_NAC" name="fecha_nac" formControlName="fechanacimiento" ><br><br>
+                <label class="direccion">Direccion: </label><br>
+                <textarea class="Direccion" id="DIRECCION" name="direccion" rows="4" cols="50" formControlName="direccion"></textarea><br><br>
+                <label class="telefono">Telefono: </label>
+                <input class="Telefono" type="text" id="TELEFONO" name="telefono" formControlName="telefono" ><br><br>
+          </form>
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button  type="button" class="btn btn-primary" >Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
