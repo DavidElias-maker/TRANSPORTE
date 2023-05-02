@@ -32,7 +32,7 @@
       <br>
       <td>
         <button type="button" id="modalbutton" (click)="edit(colaborador)" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalUpdate">Actualizar</button>
-       <td><button type="button" class="btn btn-danger" (click)="deleteColaborador(colaborador)" >Eliminar</button>
+       <td><button type="button" class="btn btn-danger" (click)="deleteColaborador(colaborador)"  [routerLink]="['/Colaborador']" (click)="resetPage()">Eliminar</button>
       </td>
     </tr>
   </tbody>
@@ -70,8 +70,8 @@
           </form>
             </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button  type="button"   class="btn btn-primary" (click)="updateColaborador()" >Actualizar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [routerLink]="['/Colaborador']" (click)="resetPage()">Close</button>
+        <button  type="button"   class="btn btn-primary" (click)="updateColaborador()" [disabled]="this.colaboradorUpdateform.invalid" >Actualizar</button>
       </div>
     </div>
   </div>

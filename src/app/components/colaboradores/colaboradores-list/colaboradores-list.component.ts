@@ -7,6 +7,7 @@ import { FormBuilder,FormControl,FormGroup,Validator, Validators } from '@angula
 import { DatePipe } from '@angular/common';
 import { data } from 'jquery';
 import { colaboradoresdelete } from 'src/app/Models/colaboradoresdelete.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -44,7 +45,7 @@ export class ColaboradoresListComponent implements OnInit{
 
 
 
-  constructor(private ColaboradoresService: ColaboradoresService, private FormBuilder:FormBuilder,private ColaboradoresServicio:ColaboradoresService) {
+  constructor(private ColaboradoresService: ColaboradoresService, private FormBuilder:FormBuilder,private ColaboradoresServicio:ColaboradoresService,private router: Router, private route:ActivatedRoute) {
 
     this.ColaboradoresService.getAllColaboradores()
       .subscribe(colaboradoresRecibidos => {
@@ -59,8 +60,8 @@ export class ColaboradoresListComponent implements OnInit{
 ngOnInit(): void {
 
   this.colaboradorUpdateform = this.FormBuilder.group({
-    id:[,Validators.required,],
-    primernombre:[,Validators.required,],
+    id:[''],
+    primernombre:['',Validators.required,],
     primerapellido:['',Validators.required],
     dni:['',Validators.required],
     fechanacimiento:['',Validators.required],
@@ -119,12 +120,17 @@ deleteColaborador(data:Colaborador){
   .subscribe(res => {
   })
 
-
-
-
 }
 
-
+resetPage() {
+  const prevConfiguration = this.router.routeReuseStrategy.shouldReuseRoute;
+   this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+   this.router.onSameUrlNavigation = "reload";
+   this.router.navigate(["./"], { relativeTo: this.route }).then(() => {
+       this.router.routeReuseStrategy.shouldReuseRoute = prevConfiguration;
+       this.router.onSameUrlNavigation = "ignore";
+   });
+ }
 
 
 
