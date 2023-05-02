@@ -10,6 +10,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>id</th>
       <th (click)="sort('primerNombre')">Primer Nombre&nbsp;<i class="fa fa-sort"></i></th>
       <th>Primer Apellido</th>
       <th>DNI</th>
@@ -21,6 +22,7 @@
   <tbody>
 
     <tr *ngFor="let colaborador of colaboradores | filter:searchText | orderBy: key:reverse | paginate: {itemsPerPage:5,currentPage:p,totalItems:colaboradores.length};">
+      <td>{{ colaborador.id }}</td>
       <td>{{ colaborador.primerNombre }}</td>
       <td>{{ colaborador.primerApellido }}</td>
       <td>{{ colaborador.dni }} </td>
@@ -29,8 +31,8 @@
       <td>{{ colaborador.telefono }}</td>
       <br>
       <td>
-        <button type="button" id="modalbutton" (click)="edit(colaborador)" (click)="colaborador.id" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalUpdate">Actualizar</button>
-       <td><button type="button" class="btn btn-danger" (click)="colaborador.id">Eliminar</button>
+        <button type="button" id="modalbutton" (click)="edit(colaborador)" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalUpdate">Actualizar</button>
+       <td><button type="button" class="btn btn-danger" (click)="deleteColaborador(colaborador)" >Eliminar</button>
       </td>
     </tr>
   </tbody>
@@ -45,13 +47,14 @@
     <div class="modal-content">
       <div style="background-color: black" class="modal-header">
         <h3 class="modal-title" id="exampleModalLongTitle" style="color: white">Actualizar</h3>
-        <button type="button"  class="close" data-bs-dismiss="modal" aria-label="Close">
+        <button type="button"  class="close" data-bs-dismiss="modal" aria-label="Close" >
 
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <form [formGroup]="colaboradorUpdateform">
+
           <label class="nombre">Primer Nombre: </label>
                 <input class="Nombre" type="text" id="NOMBRE"  name="nombre" formControlName="primernombre"><td></td>
                 <label class="apellido">Primer Apellido: </label>
@@ -68,7 +71,7 @@
             </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button  type="button"   class="btn btn-primary" (click)="updatecolaborador(this.colaboradorUpdateform.value)"  >Actualizar</button>
+        <button  type="button"   class="btn btn-primary" (click)="updateColaborador()" >Actualizar</button>
       </div>
     </div>
   </div>
