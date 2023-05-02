@@ -3,3 +3,32 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+
+
+.amber-textarea textarea.md-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #33A1FF;
+  box-shadow: 0 1px 0 0 #33A1FF;
+}
+.active-amber-textarea.md-form label.active {
+  color: #33A1FF;
+}
+.active-amber-textarea.md-form textarea.md-textarea:focus:not([readonly])+label {
+  color: #33A1FF;
+}
+textarea {
+  resize: none;
+}
+
+.active-amber-textarea-2 textarea.md-textarea {
+  border-bottom: 1px solid #33A1FF;
+  box-shadow: 0 1px 0 0 #33A1FF;
+}
+.active-amber-textarea-2.md-form label.active {
+  color: #33A1FF;
+}
+.active-amber-textarea-2.md-form label {
+  color: #33A1FF;
+}
+.active-amber-textarea-2.md-form textarea.md-textarea:focus:not([readonly])+label {
+  color: #33A1FF;
+}

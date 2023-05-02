@@ -5,7 +5,8 @@ import { Colaborador } from '../Models/colaboradores.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { data } from 'jquery';
-import { colaboradoresdelete } from '../Models/colaboradoresdelete.model';
+
+
 
 @Injectable({
   providedIn: 'root'

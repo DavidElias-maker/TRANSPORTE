@@ -2,12 +2,12 @@ import { Colaborador } from './../../../Models/colaboradores.model';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ColaboradoresService } from '../../../services/colaboradores.service';
 import { Pipe, PipeTransform } from '@angular/core';
-import { ColaboradoresUpdateComponent } from '../colaboradores-update/colaboradores-update.component';
 import { FormBuilder,FormControl,FormGroup,Validator, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { data } from 'jquery';
-import { colaboradoresdelete } from 'src/app/Models/colaboradoresdelete.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 
 
 
@@ -38,9 +38,6 @@ export class ColaboradoresListComponent implements OnInit{
   data:undefined|Colaborador[];
   colaboradorUpdateform!:FormGroup;
   ColObj : Colaborador = new Colaborador();
-  ColObjdelete : colaboradoresdelete = new colaboradoresdelete();
-  datadelete:undefined|colaboradoresdelete[];
-
 
 
 
@@ -98,8 +95,16 @@ edit(data: Colaborador) {
 
 updateColaborador(){
 
+  Swal.fire({
+    title: `Desea Actualizar al Colaborador?`,
+    showDenyButton: true,
+    confirmButtonText: 'Actualizar',
+    denyButtonText: `Cancelar`,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire('!Actualizado con exito!', '', 'success')
 
-this.ColObj.primerNombre = this.colaboradorUpdateform.value.primernombre;
+      this.ColObj.primerNombre = this.colaboradorUpdateform.value.primernombre;
 this.ColObj.primerApellido = this.colaboradorUpdateform.value.primerapellido;
 this.ColObj.dni = this.colaboradorUpdateform.value.dni;
 this.ColObj.fechaNacimiento = this.colaboradorUpdateform.value.fechanacimiento;
@@ -110,16 +115,34 @@ this.ColaboradoresServicio.updateColaborador(this.ColObj).subscribe(res =>{
   this.colaboradorUpdateform.reset();
 });
 
+    } else if (result.isDenied) {
+      Swal.fire('Se cancelo la accion de Actualizar', '', 'info')
+    }
+  })
+
 }
 
 deleteColaborador(data:Colaborador){
 
+  Swal.fire({
+    title: `Desea borrar al Colaborador ${data.primerNombre + " " +data.primerApellido}?`,
+    showDenyButton: true,
+    confirmButtonText: 'Borrar',
+    denyButtonText: `Cancelar`,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire('!Eliminado con exito!', '', 'success')
 
-  if(confirm('Estas Seguro de Eliminar este Campo?'))
-  this.ColaboradoresServicio.DeleteColaborador(data)
-  .subscribe(res => {
+      this.ColaboradoresServicio.DeleteColaborador(data)
+      .subscribe(res => {
+      })
+
+      this.resetPage()
+
+    } else if (result.isDenied) {
+      Swal.fire('Se cancelo la accion de Eliminar', '', 'info')
+    }
   })
-
 }
 
 resetPage() {

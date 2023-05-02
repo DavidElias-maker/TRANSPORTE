@@ -10,8 +10,12 @@ import { ColaboradoresModalComponent } from './components/colaboradores/colabora
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { OrderModule } from 'ngx-order-pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ColaboradoresUpdateComponent } from './components/colaboradores/colaboradores-update/colaboradores-update.component';
 import {DatePipe} from '@angular/common';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask'
+
+
+
+
 
 
 
@@ -22,7 +26,7 @@ import {DatePipe} from '@angular/common';
     AppComponent,
     ColaboradoresListComponent,
     ColaboradoresModalComponent,
-    ColaboradoresUpdateComponent
+
 
   ],
   imports: [
@@ -35,12 +39,11 @@ import {DatePipe} from '@angular/common';
     Ng2SearchPipeModule,
     OrderModule,
     NgxPaginationModule,
-    DatePipe
-
-
-
+    DatePipe,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
-  providers: [],
+  providers: [provideNgxMask()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
