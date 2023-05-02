@@ -1,0 +1,36 @@
+<button type="button" id="modalbutton" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+
+  Ingresar Sucursal
+</button>
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div style="background-color: black" class="modal-header">
+        <h3 class="modal-title" id="exampleModalLongTitle" style="color: white">Ingresar Sucursal</h3>
+        <button type="button"  class="close" data-bs-dismiss="modal" aria-label="Close" [routerLink]="['/Sucursal']" (click)="resetPage()">
+
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="sucursalform">
+        <br>
+        <div class="form-group">
+          <label for="NOMBRE">Nombre:</label>
+          <input class="Nombre" class="form-control" type="text" id="NOMBRE"  name="nombre" formControlName="nombre"><td></td><br>
+        </div>
+          <label class="direccion">Direccion: </label><br>
+          <div class="md-form amber-textarea active-amber-textarea">
+            <textarea id="form19" class="md-textarea form-control" rows="3" formControlName="direccion"></textarea>
+          </div>
+        </form>
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [routerLink]="['/Sucursal']" (click)="resetPage()">Cerrar</button>
+        <button (click)="addSucursal(this.sucursalform.value)" [disabled]="this.sucursalform.invalid" type="button" class="btn btn-primary">Ingresar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,7 +11,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { OrderModule } from 'ngx-order-pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {DatePipe} from '@angular/common';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask'
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { SucursalesListComponent } from './components/Sucursales/sucursales-list/sucursales-list.component';
+import { SucursalesModalComponent } from './components/Sucursales/sucursales-modal/sucursales-modal.component'
 
 
 
@@ -26,6 +28,8 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask'
     AppComponent,
     ColaboradoresListComponent,
     ColaboradoresModalComponent,
+    SucursalesListComponent,
+    SucursalesModalComponent,
 
 
   ],
