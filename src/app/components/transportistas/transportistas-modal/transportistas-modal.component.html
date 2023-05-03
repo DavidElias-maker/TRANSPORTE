@@ -1,0 +1,42 @@
+<button type="button" id="modalbutton" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+
+  Ingresar transportista
+</button>
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div style="background-color: black" class="modal-header">
+        <h3 class="modal-title" id="exampleModalLongTitle" style="color: white">Ingresar transportista</h3>
+        <button type="button"  class="close" data-bs-dismiss="modal" aria-label="Close">
+
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="Transportistaform">
+        <br>
+        <div class="form-group">
+          <label for="NOMBRE">Primer Nombre:</label>
+          <input class="Nombre" class="form-control" type="text" id="NOMBRE"  name="nombre" formControlName="primernombre"><td></td><br>
+        </div>
+          <label class="fecha_nac">Fecha de Nacimiento: </label>
+          <input class="Fecha_Nac" type="date" id="FECHA_NAC" name="fecha_nac" formControlName="fechanacimiento"><br><br>
+          <div class="form-group">
+            <label for="TELEFONO">Telefono: </label>
+            <input class="form-control" type="text" id="TELEFONO" name="telefono" formControlName="telefono" mask="(000)0000-0000"><br><br>
+          </div>
+          <div class="form-group">
+            <label for="TARIFA">Tarifa:</label>
+            <input class="Tarifa" class="form-control" type="text" id="TARIFA"  name="tarifa" formControlName="tarifa"><td></td><br>
+          </div>
+        </form>
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button (click)="addTransportista(this.Transportistaform.value)" [disabled]="this.Transportistaform.invalid" type="button" class="btn btn-primary">Ingresar</button>
+      </div>
+    </div>
+  </div>
+</div>

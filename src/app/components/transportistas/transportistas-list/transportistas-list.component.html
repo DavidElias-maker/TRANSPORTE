@@ -1,0 +1,76 @@
+<div class="container my-5">
+  <h1 class="mb-3">transportistas</h1>
+  <app-transportistas-modal></app-transportistas-modal><br><br>
+
+  <label class="apellido">Buscar: </label><td></td>
+  <input type="text" name="search" [(ngModel)]="searchText" placeholder="search">
+
+
+<table class="table" id="transportistatabla">
+  <thead>
+    <tr>
+
+      <th (click)="sort('primerNombre')">Primer Nombre&nbsp;<i class="fa fa-sort"></i></th>
+      <th>Fecha de Nacimiento</th>
+      <th>Telefono</th>
+      <th>Tarifa</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr *ngFor="let transportista of transportistas | filter:searchText | orderBy: key:reverse | paginate: {itemsPerPage:5,currentPage:p,totalItems:transportistas.length};">
+      <td>{{ transportista.primerNombre }}</td>
+      <td>{{ transportista.fechaNacimiento | date: "yyyy-MM-dd" }}</td>
+      <td>{{ transportista.telefono }}</td>
+      <td>{{ transportista.tarifa }}</td>
+      <br>
+      <td>
+        <button type="button" id="modalbutton" (click)="edit(transportista)" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalUpdate">Actualizar</button>
+       <td><button type="button" class="btn btn-danger" (click)="deleteTransportista(transportista)" >Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+
+</table>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<!-- Modal Update -->
+<div class="modal fade" id="ModalUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div style="background-color: black" class="modal-header">
+        <h2 class="modal-title" id="exampleModalLongTitle" style="color: white">Actualizar</h2>
+        <button type="button"  class="close" data-bs-dismiss="modal" aria-label="Close" >
+
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body ">
+        <form [formGroup]="TransportistaUpdateform">
+<br>
+              <div class="form-group">
+                <label for="NOMBRE">Primer Nombre:</label>
+                <input class="Nombre" class="form-control" type="text" id="NOMBRE"  name="nombre" formControlName="primernombre"><td></td><br>
+              </div>
+                <label class="fecha_nac">Fecha de Nacimiento: </label>
+                <input class="Fecha_Nac" type="date" id="FECHA_NAC" name="fecha_nac" formControlName="fechanacimiento"><br><br>
+                <div class="form-group">
+                  <label for="TELEFONO">Telefono: </label>
+                  <input class="form-control" type="text" id="TELEFONO" name="telefono" formControlName="telefono" mask="(000)0000-0000"><br><br>
+                </div>
+                <div class="form-group">
+                  <label for="TARIFA">Tarifa:</label>
+                  <input class="Tarifa" class="form-control" type="text" id="TARIFA"  name="tarifa" formControlName="tarifa"><td></td><br>
+                </div>
+
+
+              </form>
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button  type="button"   class="btn btn-primary" (click)="updateTransportista()" [disabled]="this.TransportistaUpdateform.invalid" (click)="ObtenerAllTransportistas()" >Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>

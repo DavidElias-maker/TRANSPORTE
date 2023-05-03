@@ -86,9 +86,6 @@ sort(key:any){
 
 }
 
-firstFunction() {
-  alert( 'Hello ' + '\nWelcome to C# Corner \nFunction in First Component');
-}
 
 edit(data: Colaborador) {
 

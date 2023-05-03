@@ -9,6 +9,7 @@ import { Observable, Subject } from 'rxjs';
 export class EventEmitterService {
 invokecolaboradoreslistcomponent = new EventEmitter();
 invokesucursaleslistcomponent = new EventEmitter();
+invoketransportistalistcomponent = new EventEmitter();
 
 constructor(){}
 
@@ -19,6 +20,10 @@ oncolaboradorescomponentClick(){
 
 onsucursalescomponentClick(){
   this.invokesucursaleslistcomponent.emit();
+}
+
+ontransportistacomponentClick(){
+  this.invoketransportistalistcomponent.emit();
 }
 
 }

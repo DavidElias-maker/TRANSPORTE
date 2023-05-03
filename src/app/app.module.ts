@@ -15,9 +15,8 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { SucursalesListComponent } from './components/Sucursales/sucursales-list/sucursales-list.component';
 import { SucursalesModalComponent } from './components/Sucursales/sucursales-modal/sucursales-modal.component'
 import { EventEmitterService } from './services/event-emitter.service';
-
-
-
+import { TransportistasListComponent } from './components/transportistas/transportistas-list/transportistas-list.component';
+import { TransportistasModalComponent } from './components/transportistas/transportistas-modal/transportistas-modal.component';
 
 
 
@@ -32,6 +31,9 @@ import { EventEmitterService } from './services/event-emitter.service';
     ColaboradoresModalComponent,
     SucursalesListComponent,
     SucursalesModalComponent,
+    TransportistasListComponent,
+    TransportistasModalComponent
+
 
 
 
