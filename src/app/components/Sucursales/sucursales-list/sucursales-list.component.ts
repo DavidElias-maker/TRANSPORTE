@@ -7,6 +7,7 @@ import { data } from 'jquery';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { SucursalesService } from 'src/app/services/sucursales.service';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
 
 @Component({
   selector: 'app-sucursales-list',
@@ -21,25 +22,35 @@ export class SucursalesListComponent implements OnInit {
   sucursalUpdateform!:FormGroup;
   ColObj : Sucursal = new Sucursal();
 
-  constructor(private SucursalesService: SucursalesService, private FormBuilder:FormBuilder,private SucursalesServicio:SucursalesService,private router: Router, private route:ActivatedRoute) {
+  constructor(private SucursalesService: SucursalesService, private FormBuilder:FormBuilder,private SucursalesServicio:SucursalesService,private router: Router, private route:ActivatedRoute,private EventEmitterServicio: EventEmitterService) {
 
-    this.SucursalesService.getAllSucursales()
-      .subscribe(SucursalesRecibidos => {
-        this.sucursales = SucursalesRecibidos;
 
-      });
 
 
 }
 
+ObtenerAllsucursales(){
+  this.SucursalesService.getAllSucursales()
+    .subscribe(SucursalesRecibidos => {
+      this.sucursales = SucursalesRecibidos;
+
+    });
+  }
+
 ngOnInit(): void {
 
+  this.ObtenerAllsucursales()
   this.sucursalUpdateform = this.FormBuilder.group({
     id:[''],
     nombre:['',Validators.required,],
     direccion:['',Validators.required]
   })
-
+  if (this.EventEmitterServicio.subsvar==undefined) {
+    this.EventEmitterServicio.subsvar = this.EventEmitterServicio.
+    invokesucursaleslistcomponent.subscribe((name:string) => {
+      this.ObtenerAllsucursales();
+    });
+  }
 
 }
 key:string = 'nombre';
@@ -78,8 +89,10 @@ updatesucursal(){
       this.ColObj.direccion = this.sucursalUpdateform.value.direccion;
 
 
+
 this.SucursalesServicio.updateSucursal(this.ColObj).subscribe(res =>{
   this.sucursalUpdateform.reset();
+  this.ObtenerAllsucursales()
 });
 
     } else if (result.isDenied) {
@@ -102,9 +115,10 @@ deletesucursal(data:Sucursal){
 
       this.SucursalesServicio.DeleteSucursal(data)
       .subscribe(res => {
+        this.ObtenerAllsucursales()
       })
 
-      this.resetPage()
+
 
     } else if (result.isDenied) {
       Swal.fire('Se cancelo la accion de Eliminar', '', 'info')
@@ -112,15 +126,7 @@ deletesucursal(data:Sucursal){
   })
 }
 
-resetPage() {
-  const prevConfiguration = this.router.routeReuseStrategy.shouldReuseRoute;
-   this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-   this.router.onSameUrlNavigation = "reload";
-   this.router.navigate(["./"], { relativeTo: this.route }).then(() => {
-       this.router.routeReuseStrategy.shouldReuseRoute = prevConfiguration;
-       this.router.onSameUrlNavigation = "ignore";
-   });
- }
+
 
 
 

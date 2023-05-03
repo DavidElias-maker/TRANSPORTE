@@ -21,8 +21,8 @@ export class ColaboradoresService {
 
     }
 
-    PostColaborador(data:Colaborador): Observable<Colaborador>{
-    return this.http.post<Colaborador>(this.baseApiUrl + '/api/Colaborador',data);
+    PostColaborador(data:Colaborador){
+    return this.http.post(this.baseApiUrl + '/api/Colaborador',data);
     }
 
     updateColaborador(data:Colaborador){
@@ -35,6 +35,8 @@ export class ColaboradoresService {
 
     return this.http.request('DELETE',this.baseApiUrl + '/api/Colaborador',{ body: data , responseType: 'text'});
   }
+
+
 
   }
 

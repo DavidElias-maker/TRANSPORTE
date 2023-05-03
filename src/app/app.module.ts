@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { EventEmitter, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,8 @@ import {DatePipe} from '@angular/common';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { SucursalesListComponent } from './components/Sucursales/sucursales-list/sucursales-list.component';
 import { SucursalesModalComponent } from './components/Sucursales/sucursales-modal/sucursales-modal.component'
+import { EventEmitterService } from './services/event-emitter.service';
+
 
 
 
@@ -32,6 +34,7 @@ import { SucursalesModalComponent } from './components/Sucursales/sucursales-mod
     SucursalesModalComponent,
 
 
+
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,7 @@ import { SucursalesModalComponent } from './components/Sucursales/sucursales-mod
     NgxMaskDirective,
     NgxMaskPipe
   ],
-  providers: [provideNgxMask()],
+  providers: [provideNgxMask(),EventEmitterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

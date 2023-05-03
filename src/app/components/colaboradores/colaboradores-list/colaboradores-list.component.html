@@ -7,7 +7,7 @@
   <input type="text" name="search" [(ngModel)]="searchText" placeholder="search">
 
 
-<table class="table">
+<table class="table" id="colaboradortabla">
   <thead>
     <tr>
 
@@ -80,8 +80,8 @@
               </form>
             </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [routerLink]="['/Colaborador']" (click)="resetPage()">Close</button>
-        <button  type="button"   class="btn btn-primary" (click)="updateColaborador()" [disabled]="this.colaboradorUpdateform.invalid" >Actualizar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button  type="button"   class="btn btn-primary" (click)="updateColaborador()" [disabled]="this.colaboradorUpdateform.invalid" (click)="ObtenerAllcolaboradores()" >Actualizar</button>
       </div>
     </div>
   </div>

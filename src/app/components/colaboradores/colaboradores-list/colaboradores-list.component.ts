@@ -1,5 +1,5 @@
 import { Colaborador } from './../../../Models/colaboradores.model';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ColaboradoresService } from '../../../services/colaboradores.service';
 import { Pipe, PipeTransform } from '@angular/core';
 import { FormBuilder,FormControl,FormGroup,Validator, Validators } from '@angular/forms';
@@ -7,6 +7,8 @@ import { DatePipe } from '@angular/common';
 import { data } from 'jquery';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
+
 
 
 
@@ -41,20 +43,22 @@ export class ColaboradoresListComponent implements OnInit{
 
 
 
+  constructor(private ColaboradoresService: ColaboradoresService, private FormBuilder:FormBuilder,private ColaboradoresServicio:ColaboradoresService,private router: Router, private route:ActivatedRoute,private EventEmitterServicio: EventEmitterService) {
 
-  constructor(private ColaboradoresService: ColaboradoresService, private FormBuilder:FormBuilder,private ColaboradoresServicio:ColaboradoresService,private router: Router, private route:ActivatedRoute) {
-
-    this.ColaboradoresService.getAllColaboradores()
-      .subscribe(colaboradoresRecibidos => {
-        this.colaboradores = colaboradoresRecibidos;
-
-      });
 
 
 }
 
+ObtenerAllcolaboradores(){
+  this.ColaboradoresService.getAllColaboradores()
+      .subscribe(colaboradoresRecibidos => {
+        this.colaboradores = colaboradoresRecibidos;
+      });
+}
+
 
 ngOnInit(): void {
+  this.ObtenerAllcolaboradores();
 
   this.colaboradorUpdateform = this.FormBuilder.group({
     id:[''],
@@ -65,9 +69,14 @@ ngOnInit(): void {
     direccion:['',Validators.required],
     telefono:['',Validators.required]
 
+
   })
-
-
+  if (this.EventEmitterServicio.subsvar==undefined) {
+    this.EventEmitterServicio.subsvar = this.EventEmitterServicio.
+    invokecolaboradoreslistcomponent.subscribe((name:string) => {
+      this.ObtenerAllcolaboradores();
+    });
+  }
 }
 key:string = 'primerNombre';
 reverse:boolean = false;
@@ -77,7 +86,9 @@ sort(key:any){
 
 }
 
-
+firstFunction() {
+  alert( 'Hello ' + '\nWelcome to C# Corner \nFunction in First Component');
+}
 
 edit(data: Colaborador) {
 
@@ -113,6 +124,7 @@ this.ColObj.telefono = this.colaboradorUpdateform.value.telefono;
 
 this.ColaboradoresServicio.updateColaborador(this.ColObj).subscribe(res =>{
   this.colaboradorUpdateform.reset();
+  this.ObtenerAllcolaboradores();
 });
 
     } else if (result.isDenied) {
@@ -135,25 +147,21 @@ deleteColaborador(data:Colaborador){
 
       this.ColaboradoresServicio.DeleteColaborador(data)
       .subscribe(res => {
+
+        this.ObtenerAllcolaboradores();
       })
 
-      this.resetPage()
+
 
     } else if (result.isDenied) {
       Swal.fire('Se cancelo la accion de Eliminar', '', 'info')
     }
   })
+
+
 }
 
-resetPage() {
-  const prevConfiguration = this.router.routeReuseStrategy.shouldReuseRoute;
-   this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-   this.router.onSameUrlNavigation = "reload";
-   this.router.navigate(["./"], { relativeTo: this.route }).then(() => {
-       this.router.routeReuseStrategy.shouldReuseRoute = prevConfiguration;
-       this.router.onSameUrlNavigation = "ignore";
-   });
- }
+
 
 
 

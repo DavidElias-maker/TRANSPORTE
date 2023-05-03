@@ -9,7 +9,7 @@
     <div class="modal-content">
       <div style="background-color: black" class="modal-header">
         <h3 class="modal-title" id="exampleModalLongTitle" style="color: white">Ingresar Colaborador</h3>
-        <button type="button"  class="close" data-bs-dismiss="modal" aria-label="Close" [routerLink]="['/Colaborador']" (click)="resetPage()">
+        <button type="button"  class="close" data-bs-dismiss="modal" aria-label="Close">
 
           <span aria-hidden="true">&times;</span>
         </button>
@@ -42,7 +42,7 @@
         </form>
             </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [routerLink]="['/Colaborador']" (click)="resetPage()">Cerrar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         <button (click)="addcolaborador(this.colaboradorform.value)" [disabled]="this.colaboradorform.invalid" type="button" class="btn btn-primary">Ingresar</button>
       </div>
     </div>

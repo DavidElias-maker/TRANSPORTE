@@ -5,6 +5,7 @@ import { FormBuilder,FormGroup,Validator, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 import { data } from 'jquery';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
 import { SucursalesService } from 'src/app/services/sucursales.service';
 import Swal from 'sweetalert2';
 
@@ -22,7 +23,7 @@ export class SucursalesModalComponent implements OnInit{
 
 
 
-    constructor(private FormBuilder:FormBuilder, private Sucursal:SucursalesService, private router: Router, private route:ActivatedRoute){
+    constructor(private FormBuilder:FormBuilder, private Sucursal:SucursalesService, private router: Router, private route:ActivatedRoute,private EventEmitterServicio: EventEmitterService){
 
     }
 
@@ -33,6 +34,9 @@ export class SucursalesModalComponent implements OnInit{
 
       })
 
+    }
+    funcionsucursalescomponent(){
+      this.EventEmitterServicio.onsucursalescomponentClick();
     }
 
     addSucursal(data:Sucursal){
@@ -45,6 +49,7 @@ export class SucursalesModalComponent implements OnInit{
           timer: 1500
         })
         this.sucursalform.reset();
+        this.funcionsucursalescomponent();
       });
 
     }

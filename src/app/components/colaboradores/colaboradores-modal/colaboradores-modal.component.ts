@@ -1,11 +1,12 @@
 import { Colaborador } from './../../../Models/colaboradores.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validator, Validators } from '@angular/forms';
 import { ColaboradoresService } from '../../../services/colaboradores.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 import { data } from 'jquery';
 import Swal from 'sweetalert2';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
 
 
 @Component({
@@ -14,15 +15,17 @@ import Swal from 'sweetalert2';
   templateUrl: './colaboradores-modal.component.html',
   styleUrls: ['./colaboradores-modal.component.css'],
 
+
 })
 export class ColaboradoresModalComponent implements OnInit {
 
 colaboradorform!:FormGroup;
 data:undefined|Colaborador[];
+public colaboradores: Colaborador[] = [];
 
 
 
-  constructor(private FormBuilder:FormBuilder, private Colaborador:ColaboradoresService, private router: Router, private route:ActivatedRoute){
+  constructor(private FormBuilder:FormBuilder, private ColaboradoresService:ColaboradoresService, private router: Router, private route:ActivatedRoute,private EventEmitterServicio: EventEmitterService){
 
   }
 
@@ -39,8 +42,14 @@ data:undefined|Colaborador[];
 
   }
 
+  funcioncolaboradorescomponent(){
+    this.EventEmitterServicio.oncolaboradorescomponentClick();
+  }
+
+
+
   addcolaborador(data:Colaborador){
-    this.Colaborador.PostColaborador(data).subscribe( res=>{
+    this.ColaboradoresService.PostColaborador(data).subscribe( res=>{
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -49,19 +58,14 @@ data:undefined|Colaborador[];
         timer: 1500
       })
       this.colaboradorform.reset();
+      this.funcioncolaboradorescomponent();
+
     });
 
   }
-   resetPage() {
-    const prevConfiguration = this.router.routeReuseStrategy.shouldReuseRoute;
-     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-     this.router.onSameUrlNavigation = "reload";
-     this.router.navigate(["./"], { relativeTo: this.route }).then(() => {
-         this.router.routeReuseStrategy.shouldReuseRoute = prevConfiguration;
-         this.router.onSameUrlNavigation = "ignore";
-     });
-   }
+
 
 
 
   }
+
