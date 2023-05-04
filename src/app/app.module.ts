@@ -17,6 +17,10 @@ import { SucursalesModalComponent } from './components/Sucursales/sucursales-mod
 import { EventEmitterService } from './services/event-emitter.service';
 import { TransportistasListComponent } from './components/transportistas/transportistas-list/transportistas-list.component';
 import { TransportistasModalComponent } from './components/transportistas/transportistas-modal/transportistas-modal.component';
+import { ViajesListComponent } from './components/Viajes/viajes-list/viajes-list.component';
+import { MatInputModule} from '@angular/material/input'
+import { MatAutocompleteModule} from '@angular/material/autocomplete'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -32,7 +36,9 @@ import { TransportistasModalComponent } from './components/transportistas/transp
     SucursalesListComponent,
     SucursalesModalComponent,
     TransportistasListComponent,
-    TransportistasModalComponent
+    TransportistasModalComponent,
+    ViajesListComponent
+
 
 
 
@@ -50,7 +56,11 @@ import { TransportistasModalComponent } from './components/transportistas/transp
     NgxPaginationModule,
     DatePipe,
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+    MatInputModule,
+    MatAutocompleteModule,
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [provideNgxMask(),EventEmitterService],
   bootstrap: [AppComponent]

@@ -4,6 +4,7 @@ import { ColaboradoresListComponent } from './components/colaboradores/colaborad
 import { SucursalesListComponent } from './components/Sucursales/sucursales-list/sucursales-list.component';
 import { config } from 'rxjs';
 import { TransportistasListComponent } from './components/transportistas/transportistas-list/transportistas-list.component';
+import { ViajesListComponent } from './components/Viajes/viajes-list/viajes-list.component';
 
 
 
@@ -11,17 +12,22 @@ const routes: Routes = [
 
   {
     path: 'Colaboradores',
-    component: ColaboradoresListComponent,
+    component: ColaboradoresListComponent
 
   },
   {
     path: 'Sucursales',
-    component: SucursalesListComponent,
+    component: SucursalesListComponent
 
   },
   {
     path: 'Transportistas',
-    component: TransportistasListComponent,
+    component: TransportistasListComponent
+
+  },
+  {
+    path: 'Viajes',
+    component: ViajesListComponent
 
   }
 
@@ -30,9 +36,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes , {
-
-    onSameUrlNavigation: 'reload'})],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
