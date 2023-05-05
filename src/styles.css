@@ -33,3 +33,10 @@ textarea {
   color: #33A1FF;
 }
 
+
+
+.disabled{
+
+    pointer-events: none;
+
+}

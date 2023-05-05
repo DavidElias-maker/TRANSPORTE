@@ -1,37 +1,31 @@
-<div class="mt-1 mb-2 p-3 bg-success text-white rounded text-center">
-</div>
+
 <div class="row">
   <div class="col-6"></div>
   <div class="col-6 text-end">
-    <button class="btn btn-sm btn-success" (click)="addRow()">Add Employee</button>
+    <button class="btn btn-dark" (click)="addRow()">Nuevo Empleado</button>
   </div>
 </div>
 <div class="pt-2">
-  <form>
+  <form [formGroup]="employeeForm">
     <table class="table table-bordered">
       <thead>
         <tr class="text-uppercase table-dark">
-          <th scope="col">
-            <input type="checkbox" name="isCheckAll" [(ngModel)]="isCheckAll" (ngModelChange)="checkAll($event)" />
-          </th>
           <th scope="col">Nombre Completo</th>
           <th scope="col">sucursal</th>
           <th scope="col">distancia</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
-      <tbody [formGroup]="employeeForm">
+
+      <tbody>
         <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
           <tr [formGroupName]="i">
-            <td scope="row" class="align-middle">
-              <input type="checkbox" formControlName="ischecked" />
-            </td>
             <td>
 
               <mat-form-field>
-              <input matInput type="text" [matAutocomplete]="auto1" class="form-control" formControlName="nombreCompleto" placeholder="Enter First">
-            <mat-autocomplete #auto1="matAutocomplete" >
-              <mat-option *ngFor="let nombreCompleto of sucursales_colaboradores" [value]="nombreCompleto.nombreCompleto">
+              <input matInput type="text" [matAutocomplete]="auto1" class="form-control" formControlName="nombreCompleto" placeholder="Enter First" >
+            <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="onOptionSelected($event)" >
+              <mat-option *ngFor="let nombreCompleto of sucursales_colaboradores" [value]="nombreCompleto.nombreCompleto" [disabled]="selectedValues.includes(nombreCompleto.nombreCompleto)">
                 {{nombreCompleto.nombreCompleto}}
 
               </mat-option>
@@ -39,32 +33,15 @@
             </mat-form-field>
           </td>
             <td>
-              <mat-form-field>
-                <input matInput type="text" [matAutocomplete]="auto2" class="form-control" formControlName="nombre" placeholder="Enter First">
-              <mat-autocomplete #auto2="matAutocomplete" >
-                <mat-option *ngFor="let nombre of sucursales_colaboradores" [value]="nombre.nombre">
-                  {{nombre.nombre}}
+              <input type="text" class="form-control" formControlName="nombre" placeholder="Sucursal"style="pointer-events: none;" >
 
-                </mat-option>
-              </mat-autocomplete>
-              </mat-form-field>
             </td>
             <td>
-              <mat-form-field>
-                <input matInput type="text" [matAutocomplete]="auto3" class="form-control" formControlName="distanciaKm" placeholder="Enter First">
-              <mat-autocomplete #auto3="matAutocomplete" >
-                <mat-option *ngFor="let distanciaKm of sucursales_colaboradores" [value]="distanciaKm.distanciaKm">
-                  {{distanciaKm.distanciaKm}}
 
-                </mat-option>
-              </mat-autocomplete>
-              </mat-form-field>
+              <input matInput type="text" class="form-control" formControlName="distanciaKm" placeholder="Distancia" style="pointer-events: none;">
             </td>
             <td>
-              <button class="btn btn-danger" (click)="removeEmployee(i)">Remove</button>
-            </td>
-            <td>
-              <button class="btn btn-danger" >agregar</button>
+              <button class="btn btn-danger" (click)="removeEmployee(i)" >Remover</button>
             </td>
           </tr>
         </ng-container>
@@ -73,7 +50,7 @@
             <td colspan="7">
               <div class="row">
                 <div class="col-12 text-center">
-                  <button class="btn btn-success" [disabled]="employeeForm.invalid" (click)="onSaveForm()">Save Bulk Employee</button>
+                  <button class="btn btn-success"  (click)="onSaveForm()">Ingresar Viaje</button>
                 </div>
               </div>
             </td>
