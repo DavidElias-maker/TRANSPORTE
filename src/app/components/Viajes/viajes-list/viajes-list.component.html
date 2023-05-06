@@ -7,6 +7,19 @@
 </div>
 <div class="pt-2">
   <form [formGroup]="employeeForm">
+
+
+    <td>
+      <mat-form-field>
+        <input matInput type="text" [matAutocomplete]="auto3" class="form-control" formControlName="nombre" placeholder="Enter First" >
+      <mat-autocomplete #auto3="matAutocomplete">
+        <mat-option *ngFor="let nombre of sucursales" [value]="nombre.nombre" [disabled]="selectedValues1.includes(nombre.nombre)">
+          {{nombre.nombre}}
+
+        </mat-option>
+      </mat-autocomplete>
+      </mat-form-field>
+    </td>
     <table class="table table-bordered">
 <thead>
   <tr class="text-uppercase table-dark">

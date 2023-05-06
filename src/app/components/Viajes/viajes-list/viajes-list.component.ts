@@ -7,6 +7,8 @@ import { data } from 'jquery';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { TransportistasService } from 'src/app/services/transportistas.service';
 import { Transportista } from '../../../Models/transportistas.model';
+import { Sucursal } from 'src/app/Models/sucursales.model';
+import { SucursalesService } from 'src/app/services/sucursales.service';
 
 
 
@@ -24,18 +26,20 @@ export class ViajesListComponent implements OnInit {
   public sucursales_colaboradores: Sucursal_Colaborador[] = [];
 
   public transportistas: Transportista[] = [];
+  public sucursales: Sucursal[] = [];
   columnSums: number[] = [];
   selectedValues1: string[] = [];
   selectedValues2: string[] = [];
   data:undefined|Sucursal_Colaborador[];
   data2:undefined|Transportista[];
+  data3:undefined|Sucursal[];
   ColObj : Sucursal_Colaborador = new Sucursal_Colaborador();
 
 
 
   isCheckAll: boolean = false;
 
-  constructor(private fb: FormBuilder, private Sucursal_ColaboradorServicio: Sucursal_ColaboradorService, private FormBuilder: FormBuilder,private TransportistasServicio:TransportistasService) {
+  constructor(private fb: FormBuilder, private Sucursal_ColaboradorServicio: Sucursal_ColaboradorService, private FormBuilder: FormBuilder,private TransportistasServicio:TransportistasService,private SucursalesServicio:SucursalesService) {
 
 
   }
@@ -44,6 +48,7 @@ export class ViajesListComponent implements OnInit {
 
 this.getNombreCompleto();
 this.ObtenerAllTransportistas();
+this.ObtenerAllsucursales();
 
 this.employeeForm = this.FormBuilder.group({
   tableRows: this.fb.array([],[Validators.required]),
@@ -112,10 +117,13 @@ ObtenerAllTransportistas(){
         this.transportistas = TtransportistasRecibidos;
       });
 }
+ObtenerAllsucursales(){
+  this.SucursalesServicio.getAllSucursales()
+    .subscribe(SucursalesRecibidos => {
+      this.sucursales = SucursalesRecibidos;
 
-
-
-
+    });
+  }
 
 
 
