@@ -14,6 +14,8 @@ import { Sucursal_Colaborador } from '../Models/sucursal_colaboradores.model';
 })
 export class Sucursal_ColaboradorService {
 
+
+
   baseApiUrl: string = environment.baseApiUrl;
 
   constructor(private http: HttpClient) {}
@@ -22,6 +24,13 @@ export class Sucursal_ColaboradorService {
 
    }
 
+   PostViaje(sucursalColaboradoresIds: {sucursalColaboradoresId: number}[], transportistaId: number){
+    const requestBody = sucursalColaboradoresIds;
+    return this.http.post(this.baseApiUrl + '/api/Viaje/pruebafor?transportistaId='+ transportistaId, requestBody);
+
+
+
+    }
 
 
 

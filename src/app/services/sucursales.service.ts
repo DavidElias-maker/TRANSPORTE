@@ -37,4 +37,8 @@ export class SucursalesService {
     return this.http.request('DELETE',this.baseApiUrl + '/api/Sucursal',{ body: data , responseType: 'text'});
   }
 
+  getAllSucursalesbyId(): Observable<Sucursal[]>{
+    return this.http.get<Sucursal[]>(this.baseApiUrl + '/api/Sucursal/SucursalColaboradorById');
+
   }
+}
