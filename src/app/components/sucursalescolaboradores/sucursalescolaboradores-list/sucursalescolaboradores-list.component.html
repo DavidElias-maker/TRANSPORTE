@@ -1,0 +1,70 @@
+<div class="container my-5">
+  <h1 class="mb-3">SucursalesColaboradores</h1>
+  <app-sucursalescolaboradores-modal></app-sucursalescolaboradores-modal><br><br>
+
+  <label class="apellido">Buscar: </label><td></td>
+  <input type="text" name="search" [(ngModel)]="searchText" placeholder="search">
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th (click)="sort('nombre')">Sucursal&nbsp;<i class="fa fa-sort"></i></th>
+      <th>Nombre</th>
+      <th>Distancia</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr *ngFor="let sucursalcolaborador of sucursalescolaboradores | filter:searchText | orderBy: key:reverse | paginate: {itemsPerPage:5,currentPage:p,totalItems:sucursalescolaboradores.length};">
+      <td>{{ sucursalcolaborador.nombre }}</td>
+      <td>{{ sucursalcolaborador.nombreCompleto }}</td>
+      <td>{{ sucursalcolaborador.distanciaKm }}</td>
+      <br>
+      <td>
+        <button type="button" id="modalbutton" (click)="edit(sucursalcolaborador)" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalUpdate">Actualizar</button>
+       <td><button type="button" class="btn btn-danger" (click)="deletesucursalcolaborador(sucursalcolaborador)" >Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+
+</table>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<!-- Modal Update -->
+<div class="modal fade" id="ModalUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div style="background-color: black" class="modal-header">
+        <h2 class="modal-title" id="exampleModalLongTitle" style="color: white">Actualizar</h2>
+        <button type="button"  class="close" data-bs-dismiss="modal" aria-label="Close" >
+
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body ">
+        <form [formGroup]="sucursalcolaboradorUpdateform">
+<br>
+              <div class="form-group">
+                <label for="SUCURSAL">Sucursal:</label>
+                <input class="Nombre" class="form-control" type="text" id="SUCURSAL"  name="nombre" formControlName="nombre"><td></td><br>
+              </div>
+              <div class="form-group">
+                <label for="NOMBRECOMPLETO">Nombre Completo: </label>
+                <input  class="form-control" type="text" id="NOMBRECOMPLETO" name="nombreCompleto" formControlName="nombreCompleto"><br>
+              </div>
+              <div class="form-group">
+                <label for="DISTANCIAKM">Distancia: </label>
+                <input class="form-control" type="text" id="DISTANCIAKM" name="distanciaKm" formControlName="distanciaKm" mask="0000-0000-00000"><br>
+              </div>
+
+              </form>
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+        <button  type="button"   class="btn btn-primary" (click)="updatesucursalcolaborador()" [disabled]="this.sucursalcolaboradorUpdateform.invalid" >Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>

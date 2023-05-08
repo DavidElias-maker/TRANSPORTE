@@ -9,6 +9,7 @@ import { TransportistasService } from 'src/app/services/transportistas.service';
 import { Transportista } from '../../../Models/transportistas.model';
 import { Sucursal } from 'src/app/Models/sucursales.model';
 import { SucursalesService } from 'src/app/services/sucursales.service';
+import { ViajeService } from 'src/app/services/viajes.service';
 
 
 
@@ -43,7 +44,7 @@ export class ViajesListComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, private Sucursal_ColaboradorServicio: Sucursal_ColaboradorService, private FormBuilder: FormBuilder,private TransportistasServicio:TransportistasService,private SucursalesServicio:SucursalesService) {
+  constructor(private fb: FormBuilder, private Sucursal_ColaboradorServicio: Sucursal_ColaboradorService, private FormBuilder: FormBuilder,private TransportistasServicio:TransportistasService,private SucursalesServicio:SucursalesService,private ViajesServicio:ViajeService) {
 
 
   }
@@ -119,16 +120,11 @@ const sucursalcolaboradorid = formValue.tableRows.map((row: { sucursalColaborado
 
 const transportistaid = formValue['transportistaid'];
 
-this.Sucursal_ColaboradorServicio.PostViaje(sucursalcolaboradorid, transportistaid).subscribe(res => {
+this.ViajesServicio.PostViaje(sucursalcolaboradorid, transportistaid).subscribe(res => {
 
 });
    this.calculateColumnSums();
   }
-
-
-
-
-
 
 
 getNombreCompleto(){

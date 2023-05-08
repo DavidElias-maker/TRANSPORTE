@@ -5,6 +5,7 @@ import { SucursalesListComponent } from './components/Sucursales/sucursales-list
 import { config } from 'rxjs';
 import { TransportistasListComponent } from './components/transportistas/transportistas-list/transportistas-list.component';
 import { ViajesListComponent } from './components/Viajes/viajes-list/viajes-list.component';
+import { SucursalescolaboradoresListComponent } from './components/sucursalescolaboradores/sucursalescolaboradores-list/sucursalescolaboradores-list.component';
 
 
 
@@ -28,6 +29,11 @@ const routes: Routes = [
   {
     path: 'Viajes',
     component: ViajesListComponent
+
+  },
+  {
+    path: 'Agregar',
+    component: SucursalescolaboradoresListComponent
 
   }
 

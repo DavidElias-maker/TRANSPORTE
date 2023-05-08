@@ -24,13 +24,21 @@ export class Sucursal_ColaboradorService {
 
    }
 
-   PostViaje(sucursalColaboradoresIds: {sucursalColaboradoresId: number}[], transportistaId: number){
-    const requestBody = sucursalColaboradoresIds;
-    return this.http.post(this.baseApiUrl + '/api/Viaje/pruebafor?transportistaId='+ transportistaId, requestBody);
-
-
-
+   PostColaborador(data:Sucursal_Colaborador){
+    return this.http.post(this.baseApiUrl + '/api/SucursalColaborador',data);
     }
+
+    updateSucursalcolaboradores(data:Sucursal_Colaborador){
+      return this.http.put(this.baseApiUrl + '/api/SucursalColaborador',data,{responseType: 'text'});
+
+
+  }
+
+  DeleteSucursalcolaborador(data:Sucursal_Colaborador){
+
+    return this.http.request('DELETE',this.baseApiUrl + '/api/SucursalColaborador',{ body: data , responseType: 'text'});
+  }
+
 
 
 

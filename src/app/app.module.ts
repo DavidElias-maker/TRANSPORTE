@@ -21,6 +21,8 @@ import { ViajesListComponent } from './components/Viajes/viajes-list/viajes-list
 import { MatInputModule} from '@angular/material/input'
 import { MatAutocompleteModule} from '@angular/material/autocomplete'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SucursalescolaboradoresListComponent } from './components/sucursalescolaboradores/sucursalescolaboradores-list/sucursalescolaboradores-list.component';
+import { SucursalescolaboradoresModalComponent } from './components/sucursalescolaboradores/sucursalescolaboradores-modal/sucursalescolaboradores-modal.component';
 
 
 
@@ -37,7 +39,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SucursalesModalComponent,
     TransportistasListComponent,
     TransportistasModalComponent,
-    ViajesListComponent
+    ViajesListComponent,
+    SucursalescolaboradoresListComponent,
+    SucursalescolaboradoresModalComponent
 
 
 
