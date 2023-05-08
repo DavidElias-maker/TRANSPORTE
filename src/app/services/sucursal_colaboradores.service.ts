@@ -24,7 +24,7 @@ export class Sucursal_ColaboradorService {
 
    }
 
-   PostColaborador(data:Sucursal_Colaborador){
+   PostSucursalColaborador(data:Sucursal_Colaborador){
     return this.http.post(this.baseApiUrl + '/api/SucursalColaborador',data);
     }
 

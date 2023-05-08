@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { data } from 'jquery';
 import { Sucursal_Colaborador } from '../Models/sucursal_colaboradores.model';
+import { Viaje } from '../Models/viajes.model';
 
 
 
@@ -21,6 +22,10 @@ export class ViajeService {
   constructor(private http: HttpClient) {}
 
 
+  getAllSucursalColaborador(): Observable<Viaje[]>{
+    return this.http.get<Sucursal_Colaborador[]>(this.baseApiUrl + '/api/SucursalColaborador');
+
+   }
    PostViaje(sucursalColaboradoresIds: {sucursalColaboradoresId: number}[], transportistaId: number){
     const requestBody = sucursalColaboradoresIds;
     return this.http.post(this.baseApiUrl + '/api/Viaje/pruebafor?transportistaId='+ transportistaId, requestBody);

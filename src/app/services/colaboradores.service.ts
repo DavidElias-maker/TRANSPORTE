@@ -5,6 +5,8 @@ import { Colaborador } from '../Models/colaboradores.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { data } from 'jquery';
+import { ColaboradorSucursal } from '../Models/colaboradoressucursales.model';
+
 
 
 
@@ -35,7 +37,10 @@ export class ColaboradoresService {
 
     return this.http.request('DELETE',this.baseApiUrl + '/api/Colaborador',{ body: data , responseType: 'text'});
   }
+  GetColaboradorSucursal(): Observable<ColaboradorSucursal[]>{
+    return this.http.get<ColaboradorSucursal[]>(this.baseApiUrl + '/api/Colaborador/ColaboradorSucursal');
 
+  }
 
 
   }

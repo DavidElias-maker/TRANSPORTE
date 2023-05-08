@@ -10,6 +10,7 @@ import { Transportista } from '../../../Models/transportistas.model';
 import { Sucursal } from 'src/app/Models/sucursales.model';
 import { SucursalesService } from 'src/app/services/sucursales.service';
 import { ViajeService } from 'src/app/services/viajes.service';
+import Swal from 'sweetalert2';
 
 
 
@@ -121,7 +122,13 @@ const sucursalcolaboradorid = formValue.tableRows.map((row: { sucursalColaborado
 const transportistaid = formValue['transportistaid'];
 
 this.ViajesServicio.PostViaje(sucursalcolaboradorid, transportistaid).subscribe(res => {
-
+  Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: `Se ha realizado el viaje Exitosamente!`,
+    showConfirmButton: false,
+    timer: 1500
+  })
 });
    this.calculateColumnSums();
   }

@@ -40,3 +40,10 @@ textarea {
     pointer-events: none;
 
 }
+
+.my-autocomplete-panel {
+  z-index: 9999;
+}
+
+
+

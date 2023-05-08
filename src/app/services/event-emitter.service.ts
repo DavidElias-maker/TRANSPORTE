@@ -10,6 +10,7 @@ export class EventEmitterService {
 invokecolaboradoreslistcomponent = new EventEmitter();
 invokesucursaleslistcomponent = new EventEmitter();
 invoketransportistalistcomponent = new EventEmitter();
+invokesucursalcolaboradorlistcomponent = new EventEmitter();
 
 constructor(){}
 
@@ -24,6 +25,9 @@ onsucursalescomponentClick(){
 
 ontransportistacomponentClick(){
   this.invoketransportistalistcomponent.emit();
+}
+onsucursalcolaboradorcomponentClick(){
+  this.invokesucursalcolaboradorlistcomponent.emit();
 }
 
 }

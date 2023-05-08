@@ -1,4 +1,4 @@
-import { EventEmitter, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, EventEmitter, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -64,8 +64,10 @@ import { SucursalescolaboradoresModalComponent } from './components/sucursalesco
     MatInputModule,
     MatAutocompleteModule,
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatAutocompleteModule
   ],
+
   providers: [provideNgxMask(),EventEmitterService],
   bootstrap: [AppComponent]
 })

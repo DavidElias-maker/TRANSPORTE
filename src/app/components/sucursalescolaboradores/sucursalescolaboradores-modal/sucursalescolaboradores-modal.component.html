@@ -1,1 +1,47 @@
-<p>sucursalescolaboradores-modal works!</p>
+<button type="button" id="modalbutton" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+
+  Ingresar Colaborador
+</button>
+
+
+<div class="modal fade" id="exampleModalCenter"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style=" z-index: 1051;" >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div style="background-color: black" class="modal-header">
+        <h3 class="modal-title" id="exampleModalLongTitle" style="color: white">Ingresar Colaborador</h3>
+        <button type="button"  class="close" data-bs-dismiss="modal" aria-label="Close">
+
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="sucursalcolaboradorform">
+        <br>
+        <td>
+
+
+        <select class="form-select"  formControlName="nombre">
+          <option *ngFor="let nombre of sucursales" [ngValue]="nombre.id"> {{nombre.nombre}}</option>
+        </select>
+
+        <td>
+          <select class="form-select"  formControlName="nombreCompleto">
+            <option *ngFor="let nombreCompleto of colaboradoressucursales" [ngValue]="nombreCompleto.id"> {{nombreCompleto.nombreCompleto}}</option>
+          </select>
+
+          </td>
+        <div class="form-group">
+          <label for="DISTANCIAKM">Distancia: </label>
+          <input class="form-control" type="text" id="DISTANCIAKM" name="distanciaKm" formControlName="distanciaKm" mask="00.00km"><br>
+        </div>
+
+        </form>
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button (click)="addsucursalcolaborador(this.sucursalcolaboradorform.value)" type="button" class="btn btn-primary">Ingresar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
