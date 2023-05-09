@@ -35,8 +35,8 @@ export class Sucursal_ColaboradorService {
 
   }
 
-  DeleteSucursalcolaborador(data:Sucursal_ColaboradorGet){
-
+  DeleteSucursalcolaborador(id: number, distanciaKm: number, colaboradorId: number, sucursalId: number){
+    const data = { id, distanciaKm, colaboradorId, sucursalId };
     return this.http.request('DELETE',this.baseApiUrl + '/api/SucursalColaborador',{ body: data , responseType: 'text'});
   }
 

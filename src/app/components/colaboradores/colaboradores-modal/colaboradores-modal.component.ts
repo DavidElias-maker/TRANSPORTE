@@ -42,7 +42,7 @@ public colaboradores: Colaborador[] = [];
 
   }
 
-  funcioncolaboradorescomponent(){
+  funcioncolaboradorescomponent():void{
     this.EventEmitterServicio.oncolaboradorescomponentClick();
   }
 

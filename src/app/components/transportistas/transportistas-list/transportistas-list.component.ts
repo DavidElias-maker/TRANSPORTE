@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder,FormControl,FormGroup,Validator, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Transportista } from 'src/app/Models/transportistas.model';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
 import { TransportistasService } from 'src/app/services/transportistas.service';
@@ -13,7 +14,7 @@ import Swal from 'sweetalert2';
 })
 
 
-export class TransportistasListComponent implements OnInit{
+export class TransportistasListComponent implements OnInit , OnDestroy{
 
   public transportistas: Transportista[] = [];
   searchText: any;
@@ -21,7 +22,7 @@ export class TransportistasListComponent implements OnInit{
   data:undefined|Transportista[];
   TransportistaUpdateform!:FormGroup;
   ColObj : Transportista = new Transportista();
-
+  subscription: Subscription = new Subscription();
 
 
   constructor(private TransportistasService: TransportistasService, private FormBuilder:FormBuilder,private TtransportistasServicio:TransportistasService,private router: Router, private route:ActivatedRoute,private EventEmitterServicio: EventEmitterService) {
@@ -29,14 +30,6 @@ export class TransportistasListComponent implements OnInit{
 
 
 }
-
-ObtenerAllTransportistas(){
-  this.TransportistasService.getAllTransportistas()
-      .subscribe(TtransportistasRecibidos => {
-        this.transportistas = TtransportistasRecibidos;
-      });
-}
-
 
 ngOnInit(): void {
   this.ObtenerAllTransportistas();
@@ -50,13 +43,23 @@ ngOnInit(): void {
 
 
   })
-  if (this.EventEmitterServicio.subsvar==undefined) {
-    this.EventEmitterServicio.subsvar = this.EventEmitterServicio.
-    invoketransportistalistcomponent.subscribe((name:string) => {
-      this.ObtenerAllTransportistas();
-    });
-  }
+  this.subscription = this.EventEmitterServicio.invoketransportistalistcomponent.subscribe(() => {
+    this.ObtenerAllTransportistas();
+  });
 }
+
+ObtenerAllTransportistas(){
+  this.TransportistasService.getAllTransportistas()
+      .subscribe(TtransportistasRecibidos => {
+        this.transportistas = TtransportistasRecibidos;
+      });
+}
+
+ngOnDestroy(): void {
+  this.subscription.unsubscribe();
+}
+
+
 key:string = 'primerNombre';
 reverse:boolean = false;
 sort(key:any){

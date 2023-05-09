@@ -131,6 +131,7 @@ this.ViajesServicio.PostViaje(sucursalcolaboradorid, transportistaid).subscribe(
   })
 });
    this.calculateColumnSums();
+   console.log(sucursalcolaboradorid);
   }
 
 

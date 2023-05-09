@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Sucursal } from 'src/app/Models/sucursales.model';
 import { Pipe, PipeTransform } from '@angular/core';
 import { FormBuilder,FormControl,FormGroup,Validator, Validators } from '@angular/forms';
@@ -8,24 +8,37 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { SucursalesService } from 'src/app/services/sucursales.service';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sucursales-list',
   templateUrl: './sucursales-list.component.html',
   styleUrls: ['./sucursales-list.component.css']
 })
-export class SucursalesListComponent implements OnInit {
+export class SucursalesListComponent implements OnInit , OnDestroy{
   public sucursales: Sucursal[] = [];
   searchText: any;
   p:number = 1;
   data:undefined|Sucursal[];
   sucursalUpdateform!:FormGroup;
   ColObj : Sucursal = new Sucursal();
-
+  subscription: Subscription = new Subscription();
   constructor(private SucursalesService: SucursalesService, private FormBuilder:FormBuilder,private SucursalesServicio:SucursalesService,private router: Router, private route:ActivatedRoute,private EventEmitterServicio: EventEmitterService) {
 
 
+}
 
+ngOnInit(): void {
+
+  this.ObtenerAllsucursales()
+  this.sucursalUpdateform = this.FormBuilder.group({
+    id:[''],
+    nombre:['',Validators.required,],
+    direccion:['',Validators.required]
+  })
+  this.subscription = this.EventEmitterServicio.invokesucursaleslistcomponent.subscribe(() => {
+    this.ObtenerAllsucursales();
+  });
 
 }
 
@@ -37,22 +50,11 @@ ObtenerAllsucursales(){
     });
   }
 
-ngOnInit(): void {
-
-  this.ObtenerAllsucursales()
-  this.sucursalUpdateform = this.FormBuilder.group({
-    id:[''],
-    nombre:['',Validators.required,],
-    direccion:['',Validators.required]
-  })
-  if (this.EventEmitterServicio.subsvar==undefined) {
-    this.EventEmitterServicio.subsvar = this.EventEmitterServicio.
-    invokesucursaleslistcomponent.subscribe((name:string) => {
-      this.ObtenerAllsucursales();
-    });
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
-}
+
 key:string = 'nombre';
 reverse:boolean = false;
 sort(key:any){

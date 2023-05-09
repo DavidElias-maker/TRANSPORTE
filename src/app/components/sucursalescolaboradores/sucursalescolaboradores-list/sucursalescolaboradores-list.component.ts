@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Pipe, PipeTransform } from '@angular/core';
 import { FormBuilder,FormControl,FormGroup,Validator, Validators } from '@angular/forms';
@@ -15,6 +15,7 @@ import { Colaborador } from 'src/app/Models/colaboradores.model';
 import { ColaboradorSucursal } from 'src/app/Models/colaboradoressucursales.model';
 import { ColaboradoresService } from 'src/app/services/colaboradores.service';
 import { Sucursal_Colaborador } from 'src/app/Models/sucursal_colaboradores.model';
+import { Subscription } from 'rxjs';
 
 
 
@@ -24,7 +25,7 @@ import { Sucursal_Colaborador } from 'src/app/Models/sucursal_colaboradores.mode
   templateUrl: './sucursalescolaboradores-list.component.html',
   styleUrls: ['./sucursalescolaboradores-list.component.css']
 })
-export class SucursalescolaboradoresListComponent {
+export class SucursalescolaboradoresListComponent implements OnInit,OnDestroy{
   public sucursalescolaboradores: Sucursal_ColaboradorGet[] = [];
   public sucursales_colaboradores: Sucursal_Colaborador[] = [];
   public sucursales: Sucursal[] = [];
@@ -37,6 +38,7 @@ export class SucursalescolaboradoresListComponent {
   sucursalcolaboradorUpdateform!:FormGroup;
   ColObj : Sucursal_ColaboradorGet = new Sucursal_ColaboradorGet();
   ColsucObj : Sucursal_Colaborador = new Sucursal_Colaborador();
+  subscription: Subscription = new Subscription();
 
   constructor( private FormBuilder:FormBuilder,private SucursalesServicio:SucursalesService,private router: Router, private route:ActivatedRoute,private EventEmitterServicio: EventEmitterService, public sucursalescolaboradoresservicio: Sucursal_ColaboradorService, private ColaboradoresServicio:ColaboradoresService) {
 
@@ -45,11 +47,30 @@ export class SucursalescolaboradoresListComponent {
 
 }
 
+
+
+ngOnInit(): void {
+  this.ObtenerAllsucursales();
+  this.ObtenerAllsucursalescolaboradores();
+  this.ObtenerAllcolaboradorsucursal();
+
+
+  this.sucursalcolaboradorUpdateform = this.FormBuilder.group({
+    id:[''],
+    distanciaKm:['',Validators.required],
+    colaboradorId:[''],
+    sucursalId:['']
+  })
+  this.subscription = this.EventEmitterServicio.invokesucursalcolaboradorlistcomponent.subscribe(() => {
+  this.ObtenerAllsucursalescolaboradores();
+  });
+
+}
+
 ObtenerAllsucursalescolaboradores(){
   this.sucursalescolaboradoresservicio.getAllSucursalColaborador()
     .subscribe(SucursalescolaboradoresRecibidos => {
       this.sucursalescolaboradores = SucursalescolaboradoresRecibidos;
-      console.log(this.sucursalescolaboradores);
     });
 
 
@@ -74,26 +95,6 @@ ObtenerAllsucursalescolaboradores(){
 
       }
 
-ngOnInit(): void {
-  this.ObtenerAllsucursales();
-  this.ObtenerAllsucursalescolaboradores();
-  this.ObtenerAllcolaboradorsucursal();
-
-
-  this.sucursalcolaboradorUpdateform = this.FormBuilder.group({
-    id:[''],
-    distanciaKm:['',Validators.required],
-    colaboradorId:[''],
-    sucursalId:['']
-  })
-  if (this.EventEmitterServicio.subsvar==undefined) {
-    this.EventEmitterServicio.subsvar = this.EventEmitterServicio.
-    invokesucursaleslistcomponent.subscribe((name:string) => {
-      this.ObtenerAllsucursalescolaboradores();
-    });
-  }
-
-}
 key:string = 'nombre';
 reverse:boolean = false;
 sort(key:any){
@@ -102,7 +103,9 @@ sort(key:any){
 
 }
 
-
+ngOnDestroy(): void {
+  this.subscription.unsubscribe();
+}
 
 edit(data1: Sucursal_Colaborador) {
 
@@ -134,8 +137,7 @@ updatesucursalcolaborador(){
 
 this.sucursalescolaboradoresservicio.updateSucursalcolaboradores(this.ColsucObj).subscribe(res =>{
   this.sucursalcolaboradorUpdateform.reset();
-  this.ObtenerAllsucursalescolaboradores()
-  console.log(this.ColsucObj)
+  this.ObtenerAllsucursalescolaboradores();
 });
 
     } else if (result.isDenied) {
@@ -145,10 +147,10 @@ this.sucursalescolaboradoresservicio.updateSucursalcolaboradores(this.ColsucObj)
 
 }
 
-deletesucursalcolaborador(data:Sucursal_ColaboradorGet){
+deletesucursalcolaborador(data1: Sucursal_Colaborador){
 
   Swal.fire({
-    title: `Desea borrar la sucursal ${data.nombre}?`,
+    title: `Desea borrar al colaborador asignado a la sucursal?`,
     showDenyButton: true,
     confirmButtonText: 'Borrar',
     denyButtonText: `Cancelar`,
@@ -156,11 +158,12 @@ deletesucursalcolaborador(data:Sucursal_ColaboradorGet){
     if (result.isConfirmed) {
       Swal.fire('!Eliminado con exito!', '', 'success')
 
-      this.sucursalescolaboradoresservicio.DeleteSucursalcolaborador(data)
-      .subscribe(res => {
-        this.ObtenerAllsucursalescolaboradores()
-      })
 
+      this.sucursalescolaboradoresservicio.DeleteSucursalcolaborador(data1.id, data1.distanciaKm, data1.colaboradorId, data1.sucursalId)
+      .subscribe(res => {
+        console.log(res); // should print {id: 1017}
+        this.sucursalescolaboradores = this.sucursalescolaboradores.filter(sc => sc.id !== data1.id);
+      });
 
 
     } else if (result.isDenied) {
@@ -168,5 +171,6 @@ deletesucursalcolaborador(data:Sucursal_ColaboradorGet){
     }
 
   })
+
 }
 }

@@ -52,34 +52,6 @@ export class SucursalescolaboradoresModalComponent {
 
 
     }
-
-
-
-
-    funcionsucursalescolaboradorescomponent(){
-      this.EventEmitterServicio.onsucursalcolaboradorcomponentClick();
-    }
-
-
-
-
-
-    addsucursalcolaborador(data:Sucursal_Colaborador){
-      this.sucursalescolaboradoresservicio.PostSucursalColaborador(data).subscribe( res=>{
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: `Se ha Ingresado al colaborador`,
-          showConfirmButton: false,
-          timer: 1500
-        })
-        this.sucursalcolaboradorform.reset();
-        this.funcionsucursalescolaboradorescomponent();
-
-      });
-console.log(data);
-    }
-
     ObtenerAllcolaboradorsucursal(){
       this.ColaboradoresService.GetColaboradorSucursal()
         .subscribe(SucursalescolaboradoresRecibidos => {
@@ -97,6 +69,27 @@ console.log(data);
 
           });
         }
+
+    funcionsucursalescolaboradorescomponent():void{
+      this.EventEmitterServicio.onsucursalcolaboradorcomponentClick();
+    }
+
+    addsucursalcolaborador(data:Sucursal_Colaborador){
+      this.sucursalescolaboradoresservicio.PostSucursalColaborador(data).subscribe( res=>{
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: `Se ha Ingresado al colaborador`,
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.sucursalcolaboradorform.reset();
+        this.funcionsucursalescolaboradorescomponent();
+
+      });
+    }
+
+
 
 
 }

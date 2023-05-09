@@ -1,10 +1,11 @@
 import { Sucursal } from './../../../Models/sucursales.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validator, Validators } from '@angular/forms';
 
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 import { data } from 'jquery';
+import { Subscription } from 'rxjs';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
 import { SucursalesService } from 'src/app/services/sucursales.service';
 import Swal from 'sweetalert2';
@@ -16,10 +17,11 @@ import Swal from 'sweetalert2';
   templateUrl: './sucursales-modal.component.html',
   styleUrls: ['./sucursales-modal.component.css']
 })
-export class SucursalesModalComponent implements OnInit{
+export class SucursalesModalComponent implements OnInit {
 
   sucursalform!:FormGroup;
   data:undefined|Sucursal[];
+  subscription: Subscription = new Subscription();
 
 
 
@@ -35,9 +37,11 @@ export class SucursalesModalComponent implements OnInit{
       })
 
     }
-    funcionsucursalescomponent(){
+    funcionsucursalescomponent():void{
       this.EventEmitterServicio.onsucursalescomponentClick();
     }
+
+
 
     addSucursal(data:Sucursal){
       this.Sucursal.PostSucursal(data).subscribe( res=>{
@@ -53,15 +57,7 @@ export class SucursalesModalComponent implements OnInit{
       });
 
     }
-     resetPage() {
-      const prevConfiguration = this.router.routeReuseStrategy.shouldReuseRoute;
-       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-       this.router.onSameUrlNavigation = "reload";
-       this.router.navigate(["./"], { relativeTo: this.route }).then(() => {
-           this.router.routeReuseStrategy.shouldReuseRoute = prevConfiguration;
-           this.router.onSameUrlNavigation = "ignore";
-       });
-     }
+
 
 
 }

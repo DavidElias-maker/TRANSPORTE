@@ -1,5 +1,5 @@
 import { Colaborador } from './../../../Models/colaboradores.model';
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ColaboradoresService } from '../../../services/colaboradores.service';
 import { Pipe, PipeTransform } from '@angular/core';
 import { FormBuilder,FormControl,FormGroup,Validator, Validators } from '@angular/forms';
@@ -8,6 +8,7 @@ import { data } from 'jquery';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
+import { Subscription } from 'rxjs';
 
 
 
@@ -32,7 +33,7 @@ import { EventEmitterService } from 'src/app/services/event-emitter.service';
 
 
 
-export class ColaboradoresListComponent implements OnInit{
+export class ColaboradoresListComponent implements OnInit , OnDestroy{
 
   public colaboradores: Colaborador[] = [];
   searchText: any;
@@ -40,7 +41,7 @@ export class ColaboradoresListComponent implements OnInit{
   data:undefined|Colaborador[];
   colaboradorUpdateform!:FormGroup;
   ColObj : Colaborador = new Colaborador();
-
+  subscription: Subscription = new Subscription();
 
 
   constructor(private ColaboradoresService: ColaboradoresService, private FormBuilder:FormBuilder,private ColaboradoresServicio:ColaboradoresService,private router: Router, private route:ActivatedRoute,private EventEmitterServicio: EventEmitterService) {
@@ -49,12 +50,7 @@ export class ColaboradoresListComponent implements OnInit{
 
 }
 
-ObtenerAllcolaboradores(){
-  this.ColaboradoresService.getAllColaboradores()
-      .subscribe(colaboradoresRecibidos => {
-        this.colaboradores = colaboradoresRecibidos;
-      });
-}
+
 
 
 ngOnInit(): void {
@@ -71,13 +67,25 @@ ngOnInit(): void {
 
 
   })
-  if (this.EventEmitterServicio.subsvar==undefined) {
-    this.EventEmitterServicio.subsvar = this.EventEmitterServicio.
-    invokecolaboradoreslistcomponent.subscribe((name:string) => {
-      this.ObtenerAllcolaboradores();
-    });
-  }
+
+  this.subscription = this.EventEmitterServicio.invokecolaboradoreslistcomponent.subscribe(() => {
+    this.ObtenerAllcolaboradores();
+  });
+
+
 }
+ObtenerAllcolaboradores(){
+  this.ColaboradoresService.getAllColaboradores()
+      .subscribe(colaboradoresRecibidos => {
+        this.colaboradores = colaboradoresRecibidos;
+      });
+}
+
+ngOnDestroy(): void {
+  this.subscription.unsubscribe();
+}
+
+
 key:string = 'primerNombre';
 reverse:boolean = false;
 sort(key:any){
@@ -154,7 +162,7 @@ deleteColaborador(data:Colaborador){
       Swal.fire('Se cancelo la accion de Eliminar', '', 'info')
     }
   })
-
+console.log(data);
 
 }
 
