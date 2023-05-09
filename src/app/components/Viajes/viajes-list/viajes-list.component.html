@@ -11,7 +11,7 @@
 
     <td>
       <mat-form-field>
-        <input matInput type="text" [matAutocomplete]="auto3" class="form-control" formControlName="nombre" placeholder="Enter First">
+        <input matInput type="text" [matAutocomplete]="auto3" class="form-control" formControlName="nombre" placeholder="Ingrese la Sucursal">
       <mat-autocomplete #auto3="matAutocomplete" (optionSelected)="onOptionSelected3($event)" >
         <mat-option *ngFor="let nombre of sucursales" [value]="nombre.nombre" [disabled]="selectedValues1.includes(nombre.nombre)">
           {{nombre.nombre}}
@@ -23,7 +23,7 @@
     <table class="table table-bordered">
 <thead>
   <tr class="text-uppercase table-dark">
-    <th scope="col">id</th>
+    <th scope="col"></th>
     <th scope="col">Transportista</th>
     <th scope="col">Tarifa</th>
   </tr>
@@ -31,12 +31,12 @@
 </thead>
 <tbody><td>
 
-  <input matInput type="text" class="form-control" formControlName="transportistaid" placeholder="id" style="pointer-events: none;">
+  <input  type="hidden" class="form-control" formControlName="transportistaid" placeholder="id" style="pointer-events: none;">
 
 </td>
   <td>
       <mat-form-field>
-        <input  matInput type="text" [matAutocomplete]="auto1" class="form-control" formControlName="primerNombre" placeholder="Enter First">
+        <input  matInput type="text" [matAutocomplete]="auto1" class="form-control" formControlName="primerNombre" placeholder="Transportista">
       <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="onOptionSelected2($event)">
         <mat-option *ngFor="let primerNombre of transportistas" [value]="primerNombre.primerNombre" [disabled]="selectedValues1.includes(primerNombre.primerNombre)">
           {{primerNombre.primerNombre}}
@@ -56,7 +56,7 @@
     <table class="table table-bordered">
       <thead>
         <tr class="text-uppercase table-dark">
-          <th scope="col">Id</th>
+          <th scope="col"></th>
           <th scope="col">Nombre Completo</th>
           <th scope="col">sucursal</th>
           <th scope="col">distancia</th>
@@ -70,13 +70,13 @@
 
             <td>
 
-              <input matInput type="text" class="form-control" formControlName="sucursalColaboradoresId" placeholder="id" style="pointer-events: none;">
+              <input  type="hidden" class="form-control" formControlName="sucursalColaboradoresId" placeholder="id" style="pointer-events: none;">
 
             </td>
             <td>
 
               <mat-form-field>
-              <input matInput type="text" [matAutocomplete]="auto1" class="form-control" formControlName="nombreCompleto" placeholder="Enter First">
+              <input matInput type="text" [matAutocomplete]="auto1" class="form-control" formControlName="nombreCompleto" placeholder="Colaborador">
             <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="onOptionSelected1($event)" >
               <mat-option *ngFor="let nombreCompleto of sucursales_colaboradores" [value]="nombreCompleto.nombreCompleto" [disabled]="selectedValues1.includes(nombreCompleto.nombreCompleto)">
                 {{nombreCompleto.nombreCompleto}}
@@ -112,7 +112,7 @@
         <tr>
           <td class="bg-warning" style="font-weight: bolder;">total distancia:</td>
           <td style="text-align: center;">{{ columnSums[2] }}</td>
-          <input type="text" formControlName="multipliedSums" placeholder="Multiplied Sums">
+          <input type="text" formControlName="multipliedSums" placeholder="Total del viaje" style="pointer-events: none;">
         </tr>
       </tbody>
     </table>

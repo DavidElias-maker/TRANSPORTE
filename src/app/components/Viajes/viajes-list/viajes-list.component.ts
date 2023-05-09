@@ -36,7 +36,7 @@ export class ViajesListComponent implements OnInit {
   data2:undefined|Transportista[];
   data3:undefined|Sucursal[];
   ColObj : Sucursal_ColaboradorGet = new Sucursal_ColaboradorGet();
-  ColObjsuc : Sucursal = new Sucursal() ;
+  ColObjsuc : Sucursal = new Sucursal();
 
 
 
