@@ -46,14 +46,16 @@
       <div class="modal-body ">
         <form [formGroup]="sucursalcolaboradorUpdateform">
 <br>
-              <div class="form-group">
-                <label for="SUCURSAL">Sucursal:</label>
-                <input class="Nombre" class="form-control" type="text" id="SUCURSAL"  name="nombre" formControlName="nombre"><td></td><br>
-              </div>
-              <div class="form-group">
-                <label for="NOMBRECOMPLETO">Nombre Completo: </label>
-                <input  class="form-control" type="text" id="NOMBRECOMPLETO" name="nombreCompleto" formControlName="nombreCompleto"><br>
-              </div>
+<select class="form-select"  formControlName="sucursalId">
+  <option *ngFor="let nombre of sucursales" [ngValue]="nombre.id"> {{nombre.nombre}}</option>
+</select>
+
+<td>
+  <select class="form-select"  formControlName="colaboradorId">
+    <option *ngFor="let nombreCompleto of colaboradoressucursales" [ngValue]="nombreCompleto.id"> {{nombreCompleto.nombreCompleto}}</option>
+  </select>
+
+  </td>
               <div class="form-group">
                 <label for="DISTANCIAKM">Distancia: </label>
                 <input class="form-control" type="text" id="DISTANCIAKM" name="distanciaKm" formControlName="distanciaKm" mask="0000-0000-00000"><br>
@@ -63,7 +65,7 @@
             </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
-        <button  type="button"   class="btn btn-primary" (click)="updatesucursalcolaborador()" [disabled]="this.sucursalcolaboradorUpdateform.invalid" >Actualizar</button>
+        <button  type="button"   class="btn btn-primary" (click)="updatesucursalcolaborador()" >Actualizar</button>
       </div>
     </div>
   </div>

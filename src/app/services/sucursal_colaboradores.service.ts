@@ -29,8 +29,8 @@ export class Sucursal_ColaboradorService {
     return this.http.post(this.baseApiUrl + '/api/SucursalColaborador',data);
     }
 
-    updateSucursalcolaboradores(data:Sucursal_ColaboradorGet){
-      return this.http.put(this.baseApiUrl + '/api/SucursalColaborador',data,{responseType: 'text'});
+    updateSucursalcolaboradores(data1:Sucursal_Colaborador){
+      return this.http.put(this.baseApiUrl + '/api/SucursalColaborador',data1,{responseType: 'text'});
 
 
   }
