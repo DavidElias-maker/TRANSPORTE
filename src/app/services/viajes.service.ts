@@ -28,7 +28,7 @@ export class ViajeService {
    }
    PostViaje(sucursalColaboradoresIds: {sucursalColaboradoresId: number}[], transportistaId: number){
     const requestBody = sucursalColaboradoresIds;
-    return this.http.post(this.baseApiUrl + '/api/Viaje/pruebafor?transportistaId='+ transportistaId, requestBody);
+    return this.http.post(this.baseApiUrl + '/api/Viaje?transportistaId='+ transportistaId, requestBody);
 
 
 

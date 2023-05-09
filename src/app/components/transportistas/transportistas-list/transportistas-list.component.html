@@ -21,7 +21,7 @@
     <tr *ngFor="let transportista of transportistas | filter:searchText | orderBy: key:reverse | paginate: {itemsPerPage:5,currentPage:p,totalItems:transportistas.length};">
       <td>{{ transportista.primerNombre }}</td>
       <td>{{ transportista.fechaNacimiento | date: "yyyy-MM-dd" }}</td>
-      <td>{{ transportista.telefono }}</td>
+      <td>{{ transportista.telefono | telefono}}</td>
       <td>{{ transportista.tarifa }}</td>
       <br>
       <td>

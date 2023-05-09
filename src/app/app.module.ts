@@ -23,7 +23,9 @@ import { MatAutocompleteModule} from '@angular/material/autocomplete'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SucursalescolaboradoresListComponent } from './components/sucursalescolaboradores/sucursalescolaboradores-list/sucursalescolaboradores-list.component';
 import { SucursalescolaboradoresModalComponent } from './components/sucursalescolaboradores/sucursalescolaboradores-modal/sucursalescolaboradores-modal.component';
-
+import { Pipe, PipeTransform } from '@angular/core';
+import { telefonopipe } from './Pipes/telefono.pipe';
+import { dnipipe } from './Pipes/dni.pipes';
 
 
 
@@ -41,7 +43,9 @@ import { SucursalescolaboradoresModalComponent } from './components/sucursalesco
     TransportistasModalComponent,
     ViajesListComponent,
     SucursalescolaboradoresListComponent,
-    SucursalescolaboradoresModalComponent
+    SucursalescolaboradoresModalComponent,
+    telefonopipe,
+    dnipipe
 
 
 
@@ -67,6 +71,11 @@ import { SucursalescolaboradoresModalComponent } from './components/sucursalesco
     BrowserAnimationsModule,
     MatAutocompleteModule
   ],
+  exports:[
+    telefonopipe,
+    dnipipe
+  ],
+
 
   providers: [provideNgxMask(),EventEmitterService],
   bootstrap: [AppComponent]

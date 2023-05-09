@@ -24,10 +24,10 @@
     <tr *ngFor="let colaborador of colaboradores | filter:searchText | orderBy: key:reverse | paginate: {itemsPerPage:5,currentPage:p,totalItems:colaboradores.length};">
       <td>{{ colaborador.primerNombre }}</td>
       <td>{{ colaborador.primerApellido }}</td>
-      <td>{{ colaborador.dni }} </td>
+      <td>{{ colaborador.dni | dni }} </td>
       <td>{{ colaborador.fechaNacimiento | date: "yyyy-MM-dd" }}</td>
       <td>{{ colaborador.direccion }}</td>
-      <td>{{ colaborador.telefono }}</td>
+      <td>{{ colaborador.telefono | telefono}}</td>
       <br>
       <td>
         <button type="button" id="modalbutton" (click)="edit(colaborador)" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalUpdate">Actualizar</button>
