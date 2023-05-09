@@ -1,6 +1,6 @@
 export class Sucursal_Colaborador {
   id:number=0;
-  nombreCompleto = "";
-  nombre: string = "";
+  colaboradorId = "";
+  sucursalId: string = "";
   distanciaKm:number = 0;
 }

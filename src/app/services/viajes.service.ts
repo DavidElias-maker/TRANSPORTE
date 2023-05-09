@@ -5,7 +5,7 @@ import { Colaborador } from '../Models/colaboradores.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { data } from 'jquery';
-import { Sucursal_Colaborador } from '../Models/sucursal_colaboradores.model';
+import { Sucursal_ColaboradorGet } from '../Models/sucursal_colaboradores.modelGet';
 import { Viaje } from '../Models/viajes.model';
 
 
@@ -23,7 +23,7 @@ export class ViajeService {
 
 
   getAllSucursalColaborador(): Observable<Viaje[]>{
-    return this.http.get<Sucursal_Colaborador[]>(this.baseApiUrl + '/api/SucursalColaborador');
+    return this.http.get<Sucursal_ColaboradorGet[]>(this.baseApiUrl + '/api/SucursalColaborador');
 
    }
    PostViaje(sucursalColaboradoresIds: {sucursalColaboradoresId: number}[], transportistaId: number){

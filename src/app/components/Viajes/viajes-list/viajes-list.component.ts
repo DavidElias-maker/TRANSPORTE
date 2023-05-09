@@ -1,7 +1,7 @@
 
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Sucursal_Colaborador } from 'src/app/Models/sucursal_colaboradores.model';
+import { Sucursal_ColaboradorGet } from 'src/app/Models/sucursal_colaboradores.modelGet';
 import { Sucursal_ColaboradorService } from 'src/app/services/sucursal_colaboradores.service';
 import { data } from 'jquery';
 import { MatAutocomplete, MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from '@angular/material/autocomplete';
@@ -25,17 +25,17 @@ import Swal from 'sweetalert2';
 export class ViajesListComponent implements OnInit {
   public employeeForm!: FormGroup;
 
-  public sucursales_colaboradores: Sucursal_Colaborador[] = [];
+  public sucursales_colaboradores: Sucursal_ColaboradorGet[] = [];
 
   public transportistas: Transportista[] = [];
   public sucursales: Sucursal[] = [];
   columnSums: number[] = [];
   selectedValues1: string[] = [];
   selectedValues2: string[] = [];
-  data:undefined|Sucursal_Colaborador[];
+  data:undefined|Sucursal_ColaboradorGet[];
   data2:undefined|Transportista[];
   data3:undefined|Sucursal[];
-  ColObj : Sucursal_Colaborador = new Sucursal_Colaborador();
+  ColObj : Sucursal_ColaboradorGet = new Sucursal_ColaboradorGet();
   ColObjsuc : Sucursal = new Sucursal() ;
 
 

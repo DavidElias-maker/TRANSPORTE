@@ -20,12 +20,12 @@
         <td>
 
 
-        <select class="form-select"  formControlName="nombre">
+        <select class="form-select"  formControlName="sucursalId">
           <option *ngFor="let nombre of sucursales" [ngValue]="nombre.id"> {{nombre.nombre}}</option>
         </select>
 
         <td>
-          <select class="form-select"  formControlName="nombreCompleto">
+          <select class="form-select"  formControlName="colaboradorId">
             <option *ngFor="let nombreCompleto of colaboradoressucursales" [ngValue]="nombreCompleto.id"> {{nombreCompleto.nombreCompleto}}</option>
           </select>
 

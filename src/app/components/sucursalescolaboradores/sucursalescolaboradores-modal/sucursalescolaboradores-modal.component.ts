@@ -4,13 +4,14 @@ import { ColaboradoresService } from '../../../services/colaboradores.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
-import { Sucursal_Colaborador } from 'src/app/Models/sucursal_colaboradores.model';
+import { Sucursal_ColaboradorGet } from 'src/app/Models/sucursal_colaboradores.modelGet';
 import { SucursalesService } from 'src/app/services/sucursales.service';
 import { Sucursal_ColaboradorService } from 'src/app/services/sucursal_colaboradores.service';
 import { Sucursal } from 'src/app/Models/sucursales.model';
 import { Colaborador } from 'src/app/Models/colaboradores.model';
 import { ColaboradorSucursal } from 'src/app/Models/colaboradoressucursales.model';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { Sucursal_Colaborador } from 'src/app/Models/sucursal_colaboradores.model';
 
 
 
@@ -21,13 +22,13 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 })
 export class SucursalescolaboradoresModalComponent {
   sucursalcolaboradorform!:FormGroup;
-  data:undefined|Sucursal_Colaborador[];
+  data:undefined|Sucursal_ColaboradorGet[];
   data1:undefined|ColaboradorSucursal[];
-  public sucursalescolaboradores: Sucursal_Colaborador[] = [];
+  public sucursalescolaboradores: Sucursal_ColaboradorGet[] = [];
   public sucursales: Sucursal[] = [];
   public colaboradores: Colaborador[] = [];
   public colaboradoressucursales: ColaboradorSucursal[] = [];
-  @ViewChild('listasucursales') inputField: ElementRef | undefined;
+
 
 
 
@@ -43,9 +44,8 @@ export class SucursalescolaboradoresModalComponent {
 
 
       this.sucursalcolaboradorform = this.FormBuilder.group({
-        id:[''],
-        nombre:['',Validators.required,],
-        nombreCompleto:['',Validators.required],
+        colaboradorId:['',Validators.required,],
+        sucursalId:['',Validators.required],
         distanciaKm:['',Validators.required]
 
       })
@@ -53,12 +53,6 @@ export class SucursalescolaboradoresModalComponent {
 
     }
 
-    onSucursalInput(event: any) {
-      const id = event.target.dataset.id;
-      const nombreCompleto = event.target.value;
-      // Do something with the id and nombreCompleto values
-      console.log(id)
-    }
 
 
 
