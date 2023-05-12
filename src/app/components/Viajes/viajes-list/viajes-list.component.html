@@ -78,7 +78,7 @@
               <mat-form-field>
               <input matInput type="text" [matAutocomplete]="auto1" class="form-control" formControlName="nombreCompleto" placeholder="Colaborador">
             <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="onOptionSelected1($event)" >
-              <mat-option *ngFor="let nombreCompleto of sucursales_colaboradores" [value]="nombreCompleto.nombreCompleto" [disabled]="selectedValues1.includes(nombreCompleto.nombreCompleto)">
+              <mat-option *ngFor="let nombreCompleto of sucursales_colaboradores_filtered" [value]="nombreCompleto.nombreCompleto" [disabled]="selectedValues1.includes(nombreCompleto.nombreCompleto)">
                 {{nombreCompleto.nombreCompleto}}
 
               </mat-option>

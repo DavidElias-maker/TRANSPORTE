@@ -26,6 +26,7 @@ export class ViajesListComponent implements OnInit {
   public employeeForm!: FormGroup;
 
   public sucursales_colaboradores: Sucursal_ColaboradorGet[] = [];
+  public sucursales_colaboradores_filtered:any[] = [];
 
   public transportistas: Transportista[] = [];
   public sucursales: Sucursal[] = [];
@@ -100,10 +101,10 @@ this.getNombreCompleto();
     const selectedSucursal = event.option.value;
   const sucursalNombre = this.sucursales.find(sucursal => sucursal.nombre === selectedSucursal)?.nombre;
   if (sucursalNombre) {
-    this.sucursales_colaboradores = this.sucursales_colaboradores.filter(colaborador => colaborador.nombre === sucursalNombre);
+    const filteredColaboradores = [...this.sucursales_colaboradores].filter(colaborador => colaborador.nombre === sucursalNombre);
+    this.sucursales_colaboradores_filtered = filteredColaboradores;
+    console.log(this.sucursales_colaboradores_filtered)
   }
-
-
 }
 
 
@@ -137,12 +138,11 @@ this.ViajesServicio.PostViaje(sucursalcolaboradorid, transportistaid).subscribe(
 
 getNombreCompleto(){
 
-
-
   this.Sucursal_ColaboradorServicio. getAllSucursalColaborador().subscribe(res => {
 
 
     this.sucursales_colaboradores = res;
+    this.sucursales_colaboradores_filtered = res;
 
   })
 }
@@ -181,7 +181,7 @@ onOptionSelected1(event: MatAutocompleteSelectedEvent) {
 
 
     const selectedNombreCompleto = event.option.value;
-    const selectedSucursalColaborador = this.sucursales_colaboradores.find(item => item.nombreCompleto === selectedNombreCompleto);
+    const selectedSucursalColaborador = this.sucursales_colaboradores_filtered.find(item => item.nombreCompleto === selectedNombreCompleto);
 
 
     const addedIndex = tableRows.length - 1;
